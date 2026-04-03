@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#5a5c5e",
+                        "primary": "#FFD700",
+                        "on-secondary-fixed-variant": "#5a5c5e",
+                        "surface-tint": "#FFD700",
+                        "on-primary-container": "#000000",
+                        "surface-container-highest": "#dadddf",
+                        "background": "#f5f6f7",
+                        "on-error-container": "#520c00",
+                        "on-tertiary-fixed-variant": "#466370",
+                        "outline": "#757778",
+                        "error-dim": "#b92902",
+                        "on-error": "#ffefec",
+                        "inverse-surface": "#0c0f10",
+                        "secondary-fixed-dim": "#d4d4d7",
+                        "outline-variant": "#abadae",
+                        "on-tertiary-fixed": "#2a4753",
+                        "on-secondary-fixed": "#3e3f42",
+                        "surface": "#f5f6f7",
+                        "on-primary-fixed": "#000000",
+                        "primary-fixed": "#FFD700",
+                        "primary-dim": "#e6c200",
+                        "inverse-on-surface": "#9b9d9e",
+                        "on-primary-fixed-variant": "#000000",
+                        "on-secondary": "#f2f2f5",
+                        "on-primary": "#000000",
+                        "tertiary-container": "#ceedfd",
+                        "inverse-primary": "#FFD700",
+                        "surface-container-low": "#eff1f2",
+                        "on-background": "#2c2f30",
+                        "surface-container": "#e6e8ea",
+                        "on-secondary-container": "#505254",
+                        "secondary-fixed": "#e2e2e5",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e2e2e5",
+                        "on-tertiary-container": "#3c5966",
+                        "primary-fixed-dim": "#FFD700",
+                        "surface-container-high": "#e0e3e4",
+                        "error-container": "#f95630",
+                        "surface-bright": "#f5f6f7",
+                        "tertiary-dim": "#375361",
+                        "tertiary": "#435f6d",
+                        "on-surface-variant": "#595c5d",
+                        "on-tertiary": "#e4f5ff",
+                        "on-surface": "#2c2f30",
+                        "primary-container": "#FFD700",
+                        "error": "#b02500",
+                        "tertiary-fixed-dim": "#c0dfee",
+                        "surface-variant": "#dadddf",
+                        "surface-dim": "#d1d5d7",
+                        "tertiary-fixed": "#ceedfd",
+                        "secondary-dim": "#4e5052"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
+<!-- Background News Feed (Dimmed Content) -->
+<main class="h-screen w-full overflow-hidden relative">
+<!-- TopAppBar Placeholder (as per JSON structure) -->
+<header class="bg-white/80 backdrop-blur-md fixed top-0 w-full z-10 flex justify-between items-center px-4 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-zinc-900">arrow_back</span>
+<h1 class="font-headline font-bold text-zinc-900 text-lg">Market News</h1>
+</div>
+<span class="material-symbols-outlined text-zinc-900">more_vert</span>
+</header>
+<!-- News Content Layer -->
+<div class="pt-20 px-4 space-y-6 opacity-30 grayscale-[0.5] blur-[1px]">
+<!-- News Item 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-start mb-3">
+<span class="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">AI Insight</span>
+<span class="text-on-surface-variant text-xs">2m ago</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface text-lg leading-tight mb-2">XRP Network Activity Surges Amid New Partnership Rumors</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2">Latest on-chain data suggests a 40% increase in active wallet addresses over the past 24 hours as institutional interest grows...</p>
+<div class="mt-4 rounded-lg overflow-hidden h-40">
+<img class="w-full h-full object-cover" data-alt="abstract financial data visualization with flowing golden lines and tech elements on white background editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGNlEoJf6SAVu8QEcv-X3wojgPoO15DJGkQWIqdu3nEbPcHkRPsFzoVnDH9iI-M2iCGvdRIb3mskp6dj8uDiqd-jQan9iUdTBpPuyehWDuJzKyDcS9jmc4dWFDtv9AaUTaNnOsEMCibZuT_hk6c95daPss70i4J5ZDy8wlt8zcey0PaGn0hlA2QVLKyI75AlaKUj6jGvQSmr92z1YTMMSWdNjqwR0W4dNW-LapQaERDmDSBvmzH2m2_4U_iG8bXeErhMibA13uJf8i"/>
+</div>
+</div>
+<!-- News Item 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-start mb-3">
+<span class="bg-primary-container text-on-primary-container px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Market Analysis</span>
+<span class="text-on-surface-variant text-xs">15m ago</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface text-lg leading-tight mb-2">Bitcoin Dominance Tested at Key 52% Resistance Level</h3>
+<p class="text-on-surface-variant text-sm">Analysts monitor critical support levels as altcoins show signs of life in the weekend trading session.</p>
+</div>
+</div>
+</main>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-40"></div>
+<!-- Spot Trading Bottom Sheet -->
+<div class="fixed bottom-0 left-0 right-0 h-[751px] bg-surface-container-lowest rounded-t-[32px] z-50 flex flex-col shadow-[0_-8px_40px_rgba(0,0,0,0.12)] overflow-hidden">
+<!-- Handlebar -->
+<div class="w-full flex justify-center py-3">
+<div class="w-12 h-1.5 bg-surface-container-highest rounded-full"></div>
+</div>
+<!-- Header -->
+<header class="px-6 pb-4">
+<div class="flex justify-between items-center mb-1">
+<span class="font-headline font-extrabold text-zinc-900 text-xl tracking-tight">Spot Trading</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">close</span>
+</div>
+<div class="flex items-baseline gap-3">
+<h2 class="font-headline font-bold text-zinc-900 text-2xl uppercase">XRP/USDT</h2>
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-error text-lg tracking-tight">0.6241</span>
+<span class="text-error text-xs font-semibold px-1.5 py-0.5 bg-error-container/10 rounded">-2.45%</span>
+</div>
+</div>
+</header>
+<!-- Main Form Area -->
+<div class="flex-1 overflow-y-auto px-6 pb-24 hide-scrollbar">
+<!-- Buy/Sell Tabs -->
+<div class="bg-surface-container-low p-1.5 rounded-2xl flex mb-6">
+<button class="flex-1 py-3.5 rounded-xl font-headline font-extrabold text-sm transition-all duration-200 bg-[#FFD700] text-black shadow-sm">
+                    Buy
+                </button>
+<button class="flex-1 py-3.5 rounded-xl font-headline font-bold text-sm text-on-surface-variant hover:text-on-surface transition-all">
+                    Sell
+                </button>
+</div>
+<!-- Trading Logic -->
+<div class="space-y-6">
+<!-- Order Type -->
+<div class="flex items-center justify-between">
+<button class="flex items-center gap-1 text-on-surface font-semibold text-sm">
+                        Limit Order <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
+</button>
+<span class="material-symbols-outlined text-on-surface-variant text-lg">info</span>
+</div>
+<!-- Input Price -->
+<div class="space-y-2">
+<div class="flex justify-between px-1">
+<label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Price</label>
+</div>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 font-headline font-bold text-lg focus:ring-2 focus:ring-primary-fixed" type="text" value="0.6241"/>
+<span class="absolute right-5 font-bold text-on-surface-variant text-sm">USDT</span>
+</div>
+</div>
+<!-- Input Amount -->
+<div class="space-y-2">
+<div class="flex justify-between px-1">
+<label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Amount</label>
+</div>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 font-headline font-bold text-lg focus:ring-2 focus:ring-primary-fixed" placeholder="Min 10 XRP" type="text"/>
+<span class="absolute right-5 font-bold text-on-surface-variant text-sm">XRP</span>
+</div>
+</div>
+<!-- Balance and Percentage Selection -->
+<div class="space-y-4 pt-2">
+<div class="flex justify-between items-center text-[12px] font-medium">
+<span class="text-on-surface-variant">Available</span>
+<span class="text-on-surface font-bold">1,000.00 USDT <span class="material-symbols-outlined text-[14px] align-middle ml-1 text-primary">add_circle</span></span>
+</div>
+<!-- Slider Interaction -->
+<div class="relative h-8 flex items-center px-2">
+<div class="absolute w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-1/2"></div>
+</div>
+<div class="absolute left-0 w-4 h-4 bg-primary rounded-full border-2 border-white shadow-md"></div>
+<div class="absolute left-1/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
+<div class="absolute left-1/2 -translate-x-1/2 w-5 h-5 bg-primary border-4 border-white shadow-lg rounded-full"></div>
+<div class="absolute left-3/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
+<div class="absolute right-0 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">25%</button>
+<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">50%</button>
+<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">75%</button>
+<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">100%</button>
+</div>
+</div>
+<!-- Order Summary Tonal Box -->
+<div class="bg-surface-container-low/50 p-4 rounded-xl space-y-2">
+<div class="flex justify-between text-xs">
+<span class="text-on-surface-variant">Transaction Fee</span>
+<span class="text-on-surface font-semibold">0.1 XRP</span>
+</div>
+<div class="flex justify-between text-sm font-bold border-t border-outline-variant/10 pt-2">
+<span class="text-on-surface">Estimated Total</span>
+<span class="text-on-surface">-- USDT</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky CTA Area -->
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/10">
+<div class="flex flex-col gap-2">
+<button class="w-full py-4 bg-[#FFD700] text-black rounded-2xl font-headline font-extrabold text-lg shadow-[0_12px_24px_-8px_rgba(255,215,0,0.4)] active:scale-[0.98] transition-all">
+            Buy XRP
+        </button>
+<p class="text-center text-[10px] font-bold text-on-surface-variant/40 uppercase tracking-[0.2em] pt-1">
+            Switch to <span class="text-error/40">Sell Tab</span> for dynamic controls
+        </p>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Hidden on desktop, simplified for overlay context) -->
+</body></html>
