@@ -133,27 +133,33 @@
 <p class="text-[10px] text-accent font-bold" id="hsi-change">--</p>
 </div>
 </div>
-<!-- Crypto Market Cap Chart Area -->
-<div class="space-y-4 bg-gray-50/50 rounded-xl p-4 border border-gray-50">
-<div class="flex justify-between items-baseline">
-<h3 class="text-xs font-bold text-gray-500 uppercase tracking-wide">加密总市值 <span class="text-gray-900 ml-1" id="crypto-market-cap">$加载中</span></h3>
-<span class="bg-accent/10 text-accent text-[10px] px-2 py-0.5 rounded-full font-bold" id="crypto-change">加载中</span>
-</div>
-<!-- Chart Container -->
-<div class="relative w-full h-64 pt-4 pb-2">
-<canvas id="cryptoMarketCapChart"></canvas>
-</div>
-<!-- Sentiment Bar -->
-<div class="pt-2">
-<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden flex shadow-inner">
-<div class="h-full sentiment-gradient" id="sentiment-bars" style="width: 65%"></div>
-<div class="h-full bg-gray-300" style="width: 35%"></div>
-</div>
-<div class="flex justify-between text-[10px] mt-2">
-<div><span class="text-gray-400 font-medium">上涨</span> <span class="font-bold text-gray-700" id="positive-coins">0</span></div>
-<div><span class="text-gray-400 font-medium">下跌</span> <span class="font-bold text-gray-700" id="negative-coins">0</span></div>
-</div>
-</div>
+<!-- Coins Rise/Fall Distribution -->
+<div class="coin-rise-fall-module space-y-4 bg-[#ECEFF4] rounded-[18px] p-5 border border-[#E3E7EE]">
+  <div class="flex justify-between items-center">
+    <h3 class="text-[18px] font-extrabold text-gray-900 tracking-tight">币种涨跌</h3>
+    <span class="material-symbols-outlined text-[#98A2B3]">chevron_right</span>
+  </div>
+
+  <div class="bg-[#F3F5F9] rounded-2xl border border-[#E4E8EF] p-4">
+    <div class="h-44 flex items-end gap-3 border-b border-[#D8DEE8] pb-2" id="coin-rise-fall-bars">
+      <!-- 动态柱子 -->
+    </div>
+    <div class="mt-4 grid grid-cols-11 gap-3 text-center text-[12px] font-bold text-[#7A869A]" id="coin-rise-fall-labels">
+      <span>10%</span><span>8%</span><span>6%</span><span>4%</span><span>2%</span><span>0%</span><span>-2%</span><span>-4%</span><span>-6%</span><span>-8%</span><span>-10%</span>
+    </div>
+  </div>
+
+  <div class="pt-1 px-1">
+    <div class="h-2.5 w-full bg-[#DDE3EC] rounded-full overflow-hidden flex shadow-inner relative">
+      <div class="h-full bg-[#10B981]" id="sentiment-bars" style="width: 50%"></div>
+      <div class="h-full bg-[#F43F5E]" id="sentiment-negative" style="width: 50%"></div>
+      <div class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-1 bg-white/95 skew-x-[-25deg]"></div>
+    </div>
+    <div class="flex justify-between items-end mt-3">
+      <div class="text-[14px] font-extrabold text-[#3F4856]">上涨 <span class="text-[#10B981] text-[32px] ml-1 align-middle leading-none" id="positive-coins">0</span></div>
+      <div class="text-[14px] font-extrabold text-[#3F4856]">下跌 <span class="text-[#F43F5E] text-[32px] ml-1 align-middle leading-none" id="negative-coins">0</span></div>
+    </div>
+  </div>
 </div>
 </section>
 <!-- END: Global Index Section -->
@@ -202,17 +208,17 @@
 <div class="space-y-3">
 <div class="flex items-center gap-2">
 <span class="w-1 h-3 bg-primary rounded-full"></span>
-<p class="text-[10px] text-gray-500 font-black uppercase tracking-widest">24小时热点</p>
+<p class="text-[12px] leading-tight text-gray-500 font-extrabold uppercase tracking-wide">24小时热点</p>
 </div>
 <div class="flex items-center justify-between text-xs py-3 px-3 bg-gray-50/50 rounded-lg border border-dashed border-gray-200">
 <div class="flex items-center gap-3">
-<div class="w-7 h-7 rounded-lg bg-white border border-gray-100 shadow-xs flex items-center justify-center text-[8px] font-bold text-gray-500 italic">安全</div>
+<div class="w-8 h-8 rounded-lg bg-white border border-gray-100 shadow-xs flex items-center justify-center text-[10px] leading-none font-bold text-gray-500 italic">安全</div>
 <div>
-<p class="text-gray-500 font-medium" id="top-news-title">加载新闻中</p>
-<p class="font-black text-gray-900" id="top-news-desc">实时抓取中...</p>
+<p class="text-[12px] leading-tight text-gray-500 font-medium" id="top-news-title">加载新闻中</p>
+<p class="text-[14px] leading-tight font-black text-gray-900 mt-0.5" id="top-news-desc">实时抓取中...</p>
 </div>
 </div>
-<span class="font-black text-danger bg-danger/5 px-2 py-1 rounded-md" id="top-news-value">$2.85亿</span>
+<span class="text-[14px] leading-none font-black text-danger bg-danger/5 px-2 py-1 rounded-md" id="top-news-value">$2.85亿</span>
 </div>
 <div class="mt-3">
   <p class="text-[10px] text-gray-500 uppercase tracking-wider flex items-center gap-1">
@@ -326,14 +332,15 @@
 // API 配置
 const YAHOO_FINANCE_API = 'https://query1.finance.yahoo.com/v10/finance/quoteSummary';
 const COINGECKO_API = 'https://api.coingecko.com/api/v3';
+const COINGLASS_OPEN_API = 'https://open-api-v3.coinglass.com/api';
+// 可在控制台执行 localStorage.setItem('COINGLASS_API_KEY', '你的key') 配置
+const COINGLASS_API_KEY = (window.COINGLASS_API_KEY || localStorage.getItem('COINGLASS_API_KEY') || '').trim();
 const INDICES = {
   djia: '^DJI',
   nasdaq: '^IXIC', 
   sp500: '^GSPC',
   hsi: '^HSI'
 };
-
-let cryptoChart = null;
 
 // 格式化数字为人民币/美元
 function formatCurrency(value) {
@@ -401,68 +408,130 @@ function updateChangeColor(index, changePercent) {
   }
 }
 
-// 从 CoinGecko 获取加密市场总市值数据（30天）
-async function fetchCryptoMarketData() {
-  try {
-    console.log('正在获取加密市场数据...');
-    
-    // 使用 mock 数据（由于 API 限流，使用模拟数据）
-    const mockMarketData = {
-      totalMarketCap: 2850000000000, // $2.85 万亿
-      changePercent: 2.45,
-      positiveCoins: 3247,
-      negativeCoins: 1853
-    };
-    
-    // 更新市值
-    document.getElementById('crypto-market-cap').textContent = formatCurrency(mockMarketData.totalMarketCap);
-    document.getElementById('crypto-change').textContent = formatPercent(mockMarketData.changePercent);
-    
-    // 改变百分比颜色
-    const changeElement = document.getElementById('crypto-change');
-    if (mockMarketData.changePercent >= 0) {
-      changeElement.classList.remove('text-danger');
-      changeElement.classList.add('text-accent');
-    } else {
-      changeElement.classList.remove('text-accent');
-      changeElement.classList.add('text-danger');
-    }
-    
-    document.getElementById('positive-coins').textContent = mockMarketData.positiveCoins;
-    document.getElementById('negative-coins').textContent = mockMarketData.negativeCoins;
-    
-    console.log('✓ 加密市场数据已加载:', formatCurrency(mockMarketData.totalMarketCap));
-    console.log(`✓ 加密货币统计: 上涨 ${mockMarketData.positiveCoins}, 下跌 ${mockMarketData.negativeCoins}`);
-    
-    // 计算情绪条百分比
-    const total = mockMarketData.positiveCoins + mockMarketData.negativeCoins;
-    if (total > 0) {
-      const sentimentPercent = (mockMarketData.positiveCoins / total) * 100;
-      document.getElementById('sentiment-bars').style.width = `${sentimentPercent}%`;
-    }
-    
-    // 获取历史数据用于绘制图表（30天）
-    await fetchCryptoHistoricalData();
-    
-  } catch (error) {
-    console.error('❌ 获取加密数据失败:', error);
-    // 显示错误提示
-    document.getElementById('crypto-market-cap').textContent = '获取失败';
-    document.getElementById('crypto-change').textContent = '--';
+function getChangeValue(item) {
+  const candidates = [
+    item?.priceChangePercent24h,
+    item?.price_change_percent_24h,
+    item?.priceChangePercent,
+    item?.changePercent24h,
+    item?.price_change_24h_percent,
+    item?.priceChange24hPercent,
+    item?.riseFallRate,
+    item?.rise_fall_rate,
+    item?.changePercent,
+    item?.change_rate,
+    item?.price_change_percent
+  ];
+  for (const v of candidates) {
+    const n = Number(v);
+    if (Number.isFinite(n)) return n;
   }
+  return null;
 }
 
-// 获取加密市场总市值的历史数据
-async function fetchCryptoHistoricalData() {
+function bucketByChange(change) {
+  if (change >= 10) return 10;
+  if (change >= 8) return 8;
+  if (change >= 6) return 6;
+  if (change >= 4) return 4;
+  if (change >= 2) return 2;
+  if (change >= 0) return 0;
+  if (change >= -2) return -2;
+  if (change >= -4) return -4;
+  if (change >= -6) return -6;
+  if (change >= -8) return -8;
+  return -10;
+}
+
+function renderCoinRiseFallDistribution(distribution, upCount, downCount) {
+  const barsEl = document.getElementById('coin-rise-fall-bars');
+  if (!barsEl) return;
+
+  const order = [10, 8, 6, 4, 2, 0, -2, -4, -6, -8, -10];
+  const maxCount = Math.max(...order.map((k) => distribution[k] || 0), 1);
+  barsEl.innerHTML = '';
+
+  order.forEach((bucket) => {
+    const count = distribution[bucket] || 0;
+    const color = bucket >= 0 ? 'bg-[#10B981]' : 'bg-[#F43F5E]';
+    const minH = 8;
+    const maxH = 130;
+    const height = Math.round((count / maxCount) * maxH);
+    const barHeight = Math.max(minH, height);
+
+    const item = document.createElement('div');
+    item.className = 'flex flex-col items-center justify-end flex-1 h-full';
+    item.innerHTML = `
+      <span class="text-[12px] font-extrabold text-[#3F4856] mb-2 leading-none">${count}</span>
+      <div class="w-6 ${color} rounded-t-[2px]" style="height:${barHeight}px"></div>
+    `;
+    barsEl.appendChild(item);
+  });
+
+  document.getElementById('positive-coins').textContent = upCount.toLocaleString();
+  document.getElementById('negative-coins').textContent = downCount.toLocaleString();
+
+  const total = upCount + downCount;
+  const upPct = total > 0 ? (upCount / total) * 100 : 50;
+  const downPct = 100 - upPct;
+  document.getElementById('sentiment-bars').style.width = `${upPct}%`;
+  const neg = document.getElementById('sentiment-negative');
+  if (neg) neg.style.width = `${downPct}%`;
+}
+
+// 从 Coinglass 获取币种涨跌分布
+async function fetchCryptoMarketData() {
   try {
-    console.log('正在获取历史数据...');
-    
-    // 由于 API 限流，使用逼真的 mock 数据
-    generateMockChart();
-    
+    console.log('正在获取 Coinglass 币种涨跌数据...');
+
+    if (!COINGLASS_API_KEY) {
+      throw new Error('未配置 COINGLASS_API_KEY');
+    }
+
+    const resp = await fetch(`${COINGLASS_OPEN_API}/futures/coins-price-change`, {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'CG-API-KEY': COINGLASS_API_KEY
+      }
+    });
+
+    if (!resp.ok) {
+      throw new Error(`Coinglass API error: ${resp.status}`);
+    }
+
+    const payload = await resp.json();
+    const list =
+      payload?.data?.list ||
+      payload?.data?.rows ||
+      payload?.data ||
+      payload?.list ||
+      [];
+    if (!Array.isArray(list) || !list.length) {
+      throw new Error('Coinglass 返回为空');
+    }
+
+    const distribution = { 10: 0, 8: 0, 6: 0, 4: 0, 2: 0, 0: 0, '-2': 0, '-4': 0, '-6': 0, '-8': 0, '-10': 0 };
+    let upCount = 0;
+    let downCount = 0;
+
+    list.forEach((item) => {
+      const change = getChangeValue(item);
+      if (change === null) return;
+      const bucket = bucketByChange(change);
+      distribution[bucket] = (distribution[bucket] || 0) + 1;
+      if (change >= 0) upCount += 1;
+      else downCount += 1;
+    });
+
+    renderCoinRiseFallDistribution(distribution, upCount, downCount);
+    console.log(`✓ 币种涨跌分布已加载: 上涨 ${upCount} / 下跌 ${downCount}`);
   } catch (error) {
-    console.error('❌ 获取历史数据失败:', error);
-    generateMockChart();
+    console.error('❌ 获取 Coinglass 币种涨跌失败:', error);
+
+    // 失败兜底：保留截图风格的模拟分布，避免空白
+    const fallback = { 10: 397, 8: 92, 6: 133, 4: 257, 2: 573, 0: 2209, '-2': 1813, '-4': 787, '-6': 610, '-8': 274, '-10': 143 };
+    renderCoinRiseFallDistribution(fallback, 3661, 4076);
   }
 }
 
@@ -531,6 +600,27 @@ async function fetchCoinglassData() {
     if (priceNote) { priceNote.textContent = '现货价格：--'; }
     return null;
   }
+}
+
+// 全局字号 +4px（排除“币种涨跌”模块）
+function increaseFontOutsideCoinModule() {
+  const root = document.querySelector('main');
+  if (!root || root.dataset.fontBumped === '1') return;
+
+  const elements = root.querySelectorAll('*');
+  elements.forEach((el) => {
+    if (el.closest('.coin-rise-fall-module')) return;
+    if (el.classList.contains('material-symbols-outlined')) return;
+    if (['SVG', 'PATH', 'CANVAS', 'IMG'].includes(el.tagName)) return;
+
+    const style = window.getComputedStyle(el);
+    const fontSize = parseFloat(style.fontSize);
+    if (!Number.isFinite(fontSize) || fontSize <= 0) return;
+
+    el.style.fontSize = `${fontSize + 4}px`;
+  });
+
+  root.dataset.fontBumped = '1';
 }
 
 let eventHunterNews = [];
@@ -602,10 +692,42 @@ function setupEventHunterPager() {
   });
 }
 
-// 从 ChainCatcher 获取最新新闻并 AI 推荐资产
+function ensureEventHunterFallback() {
+  if (eventHunterNews.length) return;
+  eventHunterNews = [
+    { title: '以太坊升级接近完成，市场情绪乐观', summary: '以太坊核心升级进度持续推进，链上活动及DeFi出借活跃度明显提升。', asset: 'ETH', url: 'https://blockcast.it/feed', change: 1.42 },
+    { title: '比特币减半预期升温，矿工活动活跃', summary: '全球矿工算力回升，矿池出块稳定，市场对减半后的供给紧缩预期加强。', asset: 'BTC', url: 'https://blockcast.it/feed', change: 1.23 },
+    { title: 'Solana 网络拥堵改善，DeFi 生态回暖', summary: '网络延迟降低后，交易费用回落，项目方资金流入和用户增长同步加速。', asset: 'SOL', url: 'https://blockcast.it/feed', change: 2.15 }
+  ];
+  eventHunterIndex = 0;
+  renderEventHunterPage();
+  const status = document.getElementById('event-hunter-status');
+  if (status) status.textContent = '已加载 3 条备用新闻';
+}
+
+function ensureBriefAndHotspotFallback() {
+  const report = document.getElementById('ai-report-content');
+  if (report && (!report.textContent || report.textContent.includes('正在处理'))) {
+    report.innerHTML = `
+      <span class="font-black text-gray-800">🎯 核心研判：</span>
+      市场短线震荡，资金分歧仍在，建议控制仓位并等待关键位确认。
+      <br/><br/>
+      <span class="font-black text-gray-800">⚠️ 风险：</span>
+      高波动环境下避免追单，优先执行止损纪律。
+    `;
+  }
+  const title = document.getElementById('top-news-title');
+  const desc = document.getElementById('top-news-desc');
+  const val = document.getElementById('top-news-value');
+  if (title && (!title.textContent || title.textContent.includes('加载'))) title.textContent = 'DeFi 借贷协议遭攻击';
+  if (desc && (!desc.textContent || desc.textContent.includes('实时抓取'))) desc.textContent = 'Drift 协议被盗 2.85 亿美元';
+  if (val && (!val.textContent || val.textContent.includes('2.85'))) val.textContent = '$2.85亿';
+}
+
+// 从 Blockcast RSS 获取最新新闻并 AI 推荐资产
 async function fetchChainCatcherNews() {
   const status = document.getElementById('event-hunter-status');
-  status.textContent = '正在加载 ChainCatcher 最新新闻...';
+  status.textContent = '正在加载 Blockcast 最新新闻...';
 
   const recommendAsset = (title) => {
     const rules = [
@@ -646,198 +768,89 @@ async function fetchChainCatcherNews() {
   }
 
   try {
-    const response = await fetch('https://www.chaincatcher.com/', { mode: 'cors' });
-    const html = await response.text();
+    const response = await fetch('https://blockcast.it/feed', { mode: 'cors' });
+    const xmlText = await response.text();
 
-    const links = [];
-    const extract = /<a[^>]+href="(\/[^\"]+)"[^>]*>([^<]{20,120})<\/a>/gi;
-    let match;
-    const seen = new Set();
-    while ((match = extract.exec(html)) && links.length < 10) {
-      const href = match[1].trim();
-      const raw = match[2].trim();
-      const title = raw.replace(/<.*?>/g, '').trim();
-      if (!title || seen.has(title)) continue;
-      seen.add(title);
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlText, 'application/xml');
+    const parseError = xmlDoc.querySelector('parsererror');
+    if (parseError) throw new Error('RSS 解析失败');
 
-      let url = href;
-      if (!/^https?:\/\//i.test(url)) {
-        url = `https://www.chaincatcher.com${url}`;
-      }
+    const items = Array.from(xmlDoc.querySelectorAll('item')).slice(0, 12);
+    const links = items.map((item) => {
+      const title = (item.querySelector('title')?.textContent || '').trim();
+      const url = (item.querySelector('link')?.textContent || '').trim();
+      const rawDesc = (item.querySelector('description')?.textContent || '').trim();
+      const cleanDesc = rawDesc.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      const summary = cleanDesc.split(/。|\.|!|！|\?/)[0].slice(0, 120).trim();
+      if (!title || !url) return null;
 
-      // 尝试从链接后内容中提取摘要
-      const snippetStart = match.index + match[0].length;
-      const snippetCandidate = html.slice(snippetStart, snippetStart + 240).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      const summary = snippetCandidate ? snippetCandidate.split(/。|\.|!|！|\?/)[0].slice(0, 120).trim() : '';
-
-      links.push({
+      return {
         title,
         summary: summary || '暂无摘要，请点击查看详情。',
         url,
         asset: recommendAsset(title),
         change: (Math.random() * 4 - 2).toFixed(2)
-      });
-    }
+      };
+    }).filter(Boolean);
 
-    if (!links.length) {
-      throw new Error('未解析到有效新闻');
-    }
+    if (!links.length) throw new Error('未解析到有效 RSS 新闻');
 
-    // 以实际时间顺序为优先：这里无法解析时间，则按抓取顺序（先出现为最新）
     eventHunterNews = links;
     eventHunterIndex = 0;
     renderEventHunterPage();
     status.textContent = `已加载 ${links.length} 条最新新闻`;
-    console.log('✓ ChainCatcher新闻已加载');
+    console.log('✓ Blockcast RSS 新闻已加载');
   } catch (error) {
-    console.error('❌ ChainCatcher新闻加载失败:', error);
+    console.error('❌ Blockcast RSS 新闻加载失败:', error);
     status.textContent = '已加载 3 条备用新闻';
     eventHunterNews = [
-      { title: '以太坊升级接近完成，市场情绪乐观', summary: '以太坊核心升级进度持续推进，链上活动及DeFi出借活跃度明显提升。', asset: 'ETH', url: 'https://www.chaincatcher.com/', change: 1.42 },
-      { title: '比特币减半预期升温，矿工活动活跃', summary: '全球矿工算力回升，矿池出块稳定，市场对减半后的供给紧缩预期加强。', asset: 'BTC', url: 'https://www.chaincatcher.com/', change: 1.23 },
-      { title: 'Solana 网络拥堵改善，DeFi 生态回暖', summary: '网络延迟降低后，交易费用回落，项目方资金流入和用户增长同步加速。', asset: 'SOL', url: 'https://www.chaincatcher.com/', change: 2.15 }
+      { title: '以太坊升级接近完成，市场情绪乐观', summary: '以太坊核心升级进度持续推进，链上活动及DeFi出借活跃度明显提升。', asset: 'ETH', url: 'https://blockcast.it/feed', change: 1.42 },
+      { title: '比特币减半预期升温，矿工活动活跃', summary: '全球矿工算力回升，矿池出块稳定，市场对减半后的供给紧缩预期加强。', asset: 'BTC', url: 'https://blockcast.it/feed', change: 1.23 },
+      { title: 'Solana 网络拥堵改善，DeFi 生态回暖', summary: '网络延迟降低后，交易费用回落，项目方资金流入和用户增长同步加速。', asset: 'SOL', url: 'https://blockcast.it/feed', change: 2.15 }
     ];
     eventHunterIndex = 0;
     renderEventHunterPage();
   }
 }
 
-// 生成 mock 图表数据（当 API 失败时）
-function generateMockChart() {
-  const dates = [];
-  const marketCaps = [];
-  
-  // 基于真实数据生成 30 天的历史数据
-  const startValue = 2350; // 30天前的市值（十亿美元）
-  let currentValue = startValue;
-  
-  for (let i = 30; i >= 0; i--) {
-    const date = new Date();
-    date.setDate(date.getDate() - i);
-    dates.push(`${date.getMonth() + 1}/${date.getDate()}`);
-    
-    // 生成比较逼真的随机游走数据
-    // 整体趋势向上，但有起伏
-    const trendDirection = Math.random() > 0.45 ? 1 : -1; // 55% 向上，45% 向下
-    const volatility = (Math.random() - 0.5) * 150; // -75 到 75 之间的波动
-    const trend = trendDirection * 20; // 每天 ±20 的趋势
-    
-    currentValue += (trend + volatility);
-    
-    // 限制在合理范围内
-    currentValue = Math.max(2200, Math.min(3000, currentValue));
-    
-    marketCaps.push(Math.round(currentValue * 100) / 100);
-  }
-  
-  console.log(`✓ Mock 数据已生成: 30 天历史数据 (${marketCaps[0].toFixed(2)}B - ${marketCaps[marketCaps.length-1].toFixed(2)}B)`);
-  initializeChart(dates, marketCaps);
-}
-
-// 初始化 Chart.js 图表
-function initializeChart(dates, values) {
-  const ctx = document.getElementById('cryptoMarketCapChart').getContext('2d');
-  
-  if (cryptoChart) {
-    cryptoChart.destroy();
-  }
-  
-  cryptoChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: dates,
-      datasets: [{
-        label: '加密总市值 (十亿 USD)',
-        data: values,
-        backgroundColor: 'rgba(255, 215, 0, 0.6)',
-        borderColor: 'rgba(255, 215, 0, 1)',
-        borderWidth: 1.5,
-        borderRadius: 4,
-        hoverBackgroundColor: 'rgba(255, 215, 0, 0.8)',
-        hoverBorderColor: 'rgba(251, 192, 45, 1)',
-        hoverBorderWidth: 2,
-        tension: 0.1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          padding: 12,
-          titleFont: { size: 12, weight: 'bold' },
-          bodyFont: { size: 11 },
-          displayColors: false,
-          callbacks: {
-            label: function(context) {
-              return `$${context.parsed.y.toFixed(2)}B`;
-            }
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: false,
-          ticks: {
-            font: { size: 10, weight: 500 },
-            color: 'rgb(107, 114, 128)',
-            callback: function(value) {
-              return `$${value.toFixed(0)}B`;
-            }
-          },
-          grid: {
-            color: 'rgba(229, 231, 235, 0.3)',
-            drawBorder: false
-          }
-        },
-        x: {
-          ticks: {
-            font: { size: 9, weight: 500 },
-            color: 'rgb(107, 114, 128)',
-            maxRotation: 45,
-            minRotation: 0
-          },
-          grid: {
-            display: false,
-            drawBorder: false
-          }
-        }
-      }
-    }
-  });
-}
 
 // 初始化：页面加载时获取数据
 async function initialize() {
   console.log('🚀 初始化金融仪表板...');
+  increaseFontOutsideCoinModule();
+  const results = await Promise.allSettled([
+    fetchGlobalIndices(),
+    fetchCryptoMarketData(),
+    fetchCoinglassData(),
+    fetchChainCatcherNews()
+  ]);
+  results.forEach((r, i) => {
+    if (r.status === 'rejected') console.error(`❌ 初始化子任务失败[${i}]`, r.reason);
+  });
   try {
-    await Promise.all([
-      fetchGlobalIndices(),
-      fetchCryptoMarketData(),
-      fetchCoinglassData(),
-      fetchChainCatcherNews()
-    ]);
-    // 分析市场情绪
     analyzeMarketSentiment();
-    console.log('✅ 仪表板初始化完成');
-  } catch (error) {
-    console.error('❌ 初始化失败:', error);
+  } catch (e) {
+    console.error('❌ 市场简报分析失败:', e);
   }
+  ensureEventHunterFallback();
+  ensureBriefAndHotspotFallback();
+  console.log('✅ 仪表板初始化完成');
 }
 
 // 每5分钟刷新一次数据（由页面加载后初始化后继续周期刷新）
 setInterval(() => {
   console.log('♻️ 刷新数据...');
-  Promise.all([
+  Promise.allSettled([
     fetchGlobalIndices(),
     fetchCryptoMarketData(),
     fetchCoinglassData(),
     fetchChainCatcherNews()
-  ]).catch(err => console.error('刷新失败:', err));
+  ]).then(() => {
+    try { analyzeMarketSentiment(); } catch (e) {}
+    ensureEventHunterFallback();
+    ensureBriefAndHotspotFallback();
+  }).catch(err => console.error('刷新失败:', err));
 }, 300000); // 5分钟
 
 console.log('📊 金融仪表板脚本已加载');
@@ -1013,17 +1026,17 @@ function renderFundPage() {
   const pageIndex = fundPageIndex;
   const page = fundPages[pageIndex];
   container.innerHTML = `
-    <div class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
-      <p class="text-sm font-black text-gray-700 tracking-wide">${page.title}</p>
-      <p class="text-xs text-gray-500 mt-1 mb-3">${page.summary}</p>
+    <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+      <p class="text-[16px] leading-tight font-black text-gray-800 tracking-tight">${page.title}</p>
+      <p class="text-[13px] leading-tight text-gray-500 mt-1.5 mb-3.5">${page.summary}</p>
       <div class="space-y-2">
         ${page.items.map(item => 
-          `<div class="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2">
+          `<div class="flex items-center justify-between rounded-lg bg-slate-50 px-3.5 py-2.5">
             <div>
-              <p class="font-bold text-sm text-slate-900">${item.label}</p>
-              <p class="text-xs text-gray-500">${item.tag}</p>
+              <p class="font-extrabold text-[15px] leading-tight text-slate-900">${item.label}</p>
+              <p class="text-[12px] leading-tight text-gray-500 mt-0.5">${item.tag}</p>
             </div>
-            <p class="font-black ${item.value.startsWith('+') ? 'text-emerald-600' : item.value.startsWith('-') ? 'text-danger' : 'text-blue-600'}">${item.value}</p>
+            <p class="text-[16px] leading-none font-black ${item.value.startsWith('+') ? 'text-emerald-600' : item.value.startsWith('-') ? 'text-danger' : 'text-blue-600'}">${item.value}</p>
           </div>`
         ).join('')}
       </div>
