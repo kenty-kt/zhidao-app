@@ -247,10 +247,10 @@
   </div>
 
   <script>
-    const SITE_URL = 'https://www.chaincatcher.com/';
-    const FEED_URL = 'https://www.chaincatcher.com/feed';
-    const FEED_RSS_URL = 'https://www.chaincatcher.com/rss';
-    const SOURCE_URLS = [SITE_URL, FEED_URL, FEED_RSS_URL];
+    const SITE_URL = 'https://blockcast.it/';
+    const FEED_URL = 'https://blockcast.it/feed';
+    const FEED_RSS_URL = 'https://blockcast.it/feed';
+    const SOURCE_URLS = [SITE_URL, FEED_URL];
     const FALLBACK_NEWS = [
       {
         title: '以太坊生态活跃度提升，链上资金持续流入',
@@ -426,7 +426,7 @@
         } catch (_) {
           continue;
         }
-        if (!fullLink.includes('chaincatcher.com')) continue;
+        if (!fullLink.includes('blockcast.it')) continue;
         if (seen.has(fullLink)) continue;
 
         const container = a.closest('article, li, div, section') || a.parentElement || a;
@@ -812,7 +812,7 @@
 
     async function loadPageData() {
       if (refreshBtn) refreshBtn.disabled = true;
-      if (feedStatusEl) feedStatusEl.textContent = '正在同步 ChainCatcher 新闻与 Binance 行情...';
+      if (feedStatusEl) feedStatusEl.textContent = '正在同步 Blockcast 新闻与 Binance 行情...';
 
       try {
         const [{ news, source }, market] = await Promise.all([
