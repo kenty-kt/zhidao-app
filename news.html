@@ -87,31 +87,18 @@
         <span>←</span><span>返回</span>
       </a>
       <div class="text-center">
-        <p class="font-headline font-extrabold tracking-tight">资讯</p>
-        <p class="text-[11px] text-gray-400">ChainCatcher 实时新闻 + AI 币种推荐</p>
+        <p class="font-headline font-extrabold tracking-tight">资讯助手</p>
       </div>
       <div class="w-8"></div>
     </div>
   </header>
 
   <main class="max-w-3xl mx-auto px-4 py-5 pb-28 space-y-4">
-    <section class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-      <div class="flex items-start justify-between gap-3">
-        <div>
-          <h1 class="font-headline font-extrabold text-lg">今日快讯</h1>
-          <p class="text-xs text-gray-500 mt-1">来源: https://www.chaincatcher.com/</p>
-        </div>
-        <button id="refreshBtn" class="text-xs px-3 py-1.5 rounded-full bg-primary-container text-[#5a4900] font-semibold">刷新</button>
-      </div>
-      <p id="feedStatus" class="text-xs text-gray-500 mt-3">正在加载新闻与行情数据...</p>
-      <p class="text-[11px] text-gray-400 mt-2">行情来源: Binance 公开接口（无需 API Key）</p>
-    </section>
-
     <section id="newsList" class="space-y-4"></section>
   </main>
 
   <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 bottom-nav-safe z-50">
-    <nav class="w-full max-w-md mx-auto px-8 py-3 flex items-center justify-between">
+    <nav class="w-full max-w-md mx-auto px-5 py-3 flex items-center justify-between">
       <a href="code.html" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
         <span class="material-symbols-outlined text-[26px]">smart_toy</span>
         <span class="text-[15px] font-bold leading-none mt-1">Agent</span>
@@ -124,6 +111,10 @@
         <span class="material-symbols-outlined text-[26px]" style="font-variation-settings:'FILL' 1">newspaper</span>
         <span class="text-[15px] font-black leading-none mt-1">资讯助手</span>
         <span class="absolute -bottom-2 w-8 h-1.5 bg-primary-container rounded-full"></span>
+      </a>
+      <a href="#" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
+        <span class="material-symbols-outlined text-[26px]">account_balance_wallet</span>
+        <span class="text-[15px] font-bold leading-none mt-1">钱包</span>
       </a>
     </nav>
     <div class="w-full max-w-md mx-auto px-4 pb-4">
@@ -242,12 +233,12 @@
         </div>
       </div>
 
-      <div class="absolute bottom-0 left-0 right-0 p-6 bg-white border-t border-outline-variant/10">
+      <div class="absolute bottom-0 left-0 right-0 px-6 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] bg-white border-t border-outline-variant/10">
         <div class="flex flex-col gap-2">
           <button id="tradeSubmitBtn" class="w-full py-4 bg-emerald-500 text-white rounded-2xl font-headline font-extrabold text-lg shadow-[0_12px_24px_-8px_rgba(16,185,129,0.45)] active:scale-[0.98] transition-all">
             Buy XRP
           </button>
-          <p id="tradeHint" class="text-center text-[10px] font-bold text-on-surface-variant/40 uppercase tracking-[0.2em] pt-1">
+          <p id="tradeHint" class="text-center text-[10px] font-bold text-on-surface-variant/65 uppercase tracking-[0.2em] pt-1">
             Switch to <span class="text-error/40">Sell Tab</span> for dynamic controls
           </p>
         </div>
@@ -705,6 +696,14 @@
       const detailsChangeClass = Number.isFinite(metric?.priceChange24h)
         ? (Number(metric.priceChange24h) >= 0 ? 'text-emerald-600' : 'text-rose-600')
         : '';
+      const recommendSide = Number.isFinite(metric?.priceChange24h)
+        ? (Number(metric.priceChange24h) >= 0 ? 'buy' : 'sell')
+        : 'buy';
+      const actionLabel = recommendSide === 'buy' ? '买入' : '卖出';
+      const actionClass = recommendSide === 'buy'
+        ? 'bg-emerald-500 text-white'
+        : 'bg-rose-500 text-white';
+      const actionIcon = recommendSide === 'buy' ? 'shopping_cart' : 'trending_down';
       const metricsHtml = [
         metricCell('24h涨跌', changeValue, detailsChangeClass),
         metricCell('24h最高', metric && Number.isFinite(metric.high24h) ? `$${formatPrice(metric.high24h)}` : '--'),
@@ -750,13 +749,10 @@
 
           <div class="metrics grid grid-cols-4 gap-2 mt-4">${metricsHtml}</div>
 
-          <div class="flex gap-3 mt-4">
-            <button class="buyBtn flex-1 py-3 bg-emerald-500 text-white font-headline font-extrabold rounded-2xl active:scale-95 transition-transform flex items-center justify-center gap-2">
-              <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">shopping_cart</span>
-              买入
-            </button>
-            <button class="sellBtn flex-1 py-3 bg-rose-500 text-white font-headline font-extrabold rounded-2xl active:scale-95 transition-transform">
-              卖出
+          <div class="mt-4">
+            <button class="actionBtn w-full py-3 ${actionClass} font-headline font-extrabold rounded-2xl active:scale-95 transition-transform flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">${actionIcon}</span>
+              ${actionLabel}
             </button>
           </div>
         </div>
@@ -767,8 +763,7 @@
       const recommendTriggerEl = card.querySelector('.recommendTrigger');
       const expandPanelEl = card.querySelector('.expandPanel');
       const aiTextEl = card.querySelector('.aiText');
-      const buyBtnEl = card.querySelector('.buyBtn');
-      const sellBtnEl = card.querySelector('.sellBtn');
+      const actionBtnEl = card.querySelector('.actionBtn');
 
       let summaryExpanded = false;
       let aiLoaded = false;
@@ -793,18 +788,9 @@
         aiLoaded = true;
       });
 
-      buyBtnEl.addEventListener('click', () => {
+      actionBtnEl.addEventListener('click', () => {
         openTradeModal({
-          side: 'buy',
-          symbol: newsItem.recommend,
-          price: priceValue,
-          change: changeValue
-        });
-      });
-
-      sellBtnEl.addEventListener('click', () => {
-        openTradeModal({
-          side: 'sell',
+          side: recommendSide,
           symbol: newsItem.recommend,
           price: priceValue,
           change: changeValue
@@ -825,8 +811,8 @@
     }
 
     async function loadPageData() {
-      refreshBtn.disabled = true;
-      feedStatusEl.textContent = '正在同步 ChainCatcher 新闻与 Binance 行情...';
+      if (refreshBtn) refreshBtn.disabled = true;
+      if (feedStatusEl) feedStatusEl.textContent = '正在同步 ChainCatcher 新闻与 Binance 行情...';
 
       try {
         const [{ news, source }, market] = await Promise.all([
@@ -839,7 +825,7 @@
 
         const marketHint = marketStatus.message;
 
-        feedStatusEl.textContent = `已加载 ${news.length} 条新闻（来源: ${source}）。${marketHint}`;
+        if (feedStatusEl) feedStatusEl.textContent = `已加载 ${news.length} 条新闻（来源: ${source}）。${marketHint}`;
       } catch (err) {
         console.error(err);
         const fallback = FALLBACK_NEWS.map((item, index) => ({
@@ -851,13 +837,13 @@
           recommend: recommendCoin(`${item.title} ${item.summary}`)
         }));
         renderNews(fallback);
-        feedStatusEl.textContent = `Feed 拉取失败，已显示本地备用新闻。错误: ${err.message || '未知错误'}`;
+        if (feedStatusEl) feedStatusEl.textContent = `Feed 拉取失败，已显示本地备用新闻。错误: ${err.message || '未知错误'}`;
       } finally {
-        refreshBtn.disabled = false;
+        if (refreshBtn) refreshBtn.disabled = false;
       }
     }
 
-    refreshBtn.addEventListener('click', loadPageData);
+    if (refreshBtn) refreshBtn.addEventListener('click', loadPageData);
     tradeBackdropEl.addEventListener('click', closeTradeModal);
     tradeCloseBtnEl.addEventListener('click', closeTradeModal);
     tabBuyEl.addEventListener('click', () => {
