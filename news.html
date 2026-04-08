@@ -83,13 +83,14 @@
 <body class="bg-surface text-on-surface min-h-screen pb-44">
   <header class="status-bar-safe sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
     <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="code.html" class="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-gray-900">
-        <span>←</span><span>返回</span>
-      </a>
+      <div class="w-8"></div>
       <div class="text-center">
         <p class="font-headline font-extrabold tracking-tight">资讯助手</p>
       </div>
-      <div class="w-8"></div>
+      <a href="wallet.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold">
+        <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+        <span>1,280.45 USDT</span>
+      </a>
     </div>
   </header>
 
@@ -98,149 +99,162 @@
   </main>
 
   <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 bottom-nav-safe z-50">
-    <nav class="w-full max-w-md mx-auto px-5 py-3 flex items-center justify-between">
-      <a href="code.html" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
-        <span class="material-symbols-outlined text-[26px]">smart_toy</span>
-        <span class="text-[15px] font-bold leading-none mt-1">Agent</span>
-      </a>
-      <a href="Image 2.html" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
-        <span class="material-symbols-outlined text-[26px]">expand_circle_down</span>
-        <span class="text-[15px] font-bold leading-none mt-1">发现</span>
-      </a>
-      <a href="news.html" class="relative flex flex-col items-center justify-center min-w-[72px] text-gray-900">
-        <span class="material-symbols-outlined text-[26px]" style="font-variation-settings:'FILL' 1">newspaper</span>
-        <span class="text-[15px] font-black leading-none mt-1">资讯助手</span>
-        <span class="absolute -bottom-2 w-8 h-1.5 bg-primary-container rounded-full"></span>
-      </a>
-      <a href="#" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
-        <span class="material-symbols-outlined text-[26px]">account_balance_wallet</span>
-        <span class="text-[15px] font-bold leading-none mt-1">钱包</span>
-      </a>
-    </nav>
+    <!-- 底部导航栏已注释 -->
     <div class="w-full max-w-md mx-auto px-4 pb-4">
       <div class="flex items-center justify-between gap-3">
-        <button class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
-          <span class="text-[10px] font-black text-gray-500">交易</span>
-        </button>
-        <div class="flex-grow h-12 bg-gray-50 rounded-2xl border border-gray-200 px-4 flex items-center gap-3">
+        <a href="news.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+          <span class="text-[10px] font-black text-gray-500">资讯</span>
+        </a>
+        <div id="openAiAssistantInput" class="flex-grow h-12 bg-gray-50 rounded-2xl border border-gray-200 px-4 flex items-center gap-3 cursor-pointer">
           <span class="material-symbols-outlined text-[#8a6d00] text-xl">mic</span>
-          <input class="flex-grow text-sm border-none focus:ring-0 p-0 text-gray-700 bg-transparent placeholder:text-gray-400" placeholder="提问或搜索" type="text" />
-          <span class="material-symbols-outlined text-gray-400 text-xl">grid_view</span>
+          <input id="aiAssistantInput" class="flex-grow text-sm border-none focus:ring-0 p-0 text-gray-700 bg-transparent placeholder:text-gray-400 cursor-pointer" placeholder="提问或搜索" type="text" readonly />
         </div>
-        <button class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+        <a href="trade.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
           <span class="text-[10px] font-black text-gray-500">行情</span>
-        </button>
+        </a>
       </div>
       <p class="text-[9px] text-gray-400 mt-2 text-center">内容由AI生成，不构成投资建议</p>
     </div>
   </div>
 
   <div id="tradeModal" class="trade-modal fixed inset-0 z-[60]">
-    <div id="tradeBackdrop" class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm"></div>
-    <div class="trade-sheet fixed bottom-0 left-0 right-0 h-[751px] max-h-[88vh] bg-white rounded-t-[32px] z-[61] flex flex-col shadow-[0_-8px_40px_rgba(0,0,0,0.12)] overflow-hidden">
-      <div class="absolute inset-0 bg-white -z-10"></div>
+    <div id="tradeBackdrop" class="absolute inset-0 bg-slate-950/45 backdrop-blur-sm"></div>
+    <div class="trade-sheet fixed bottom-0 left-0 right-0 max-h-[92vh] bg-[#08121f] rounded-t-[30px] z-[61] flex flex-col shadow-[0_-20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-white/10">
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent -z-10"></div>
       <div class="w-full flex justify-center py-3">
-        <div class="w-12 h-1.5 bg-surface-container-highest rounded-full"></div>
+        <div class="w-14 h-1.5 bg-slate-700 rounded-full"></div>
       </div>
 
-      <header class="px-6 pb-4">
-        <div class="flex justify-between items-center mb-1">
-          <span class="font-headline font-extrabold text-zinc-900 text-xl tracking-tight">Spot Trading</span>
-          <button id="tradeCloseBtn" class="material-symbols-outlined text-on-surface-variant cursor-pointer">close</button>
+      <header class="px-6 pb-4 text-white">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs text-slate-400">快速交易 · <span id="tradeModalPair" class="uppercase">LINKUSDT</span> 永续</p>
+            <p class="text-sm text-slate-500 mt-1">LINK-USDT-SWAP · 模拟盘</p>
+          </div>
+          <button id="tradeCloseBtn" class="material-symbols-outlined text-slate-300 cursor-pointer">close</button>
         </div>
-        <div class="flex items-baseline gap-3">
-          <h2 id="tradePair" class="font-headline font-bold text-zinc-900 text-2xl uppercase">BTC/USDT</h2>
-          <div class="flex items-center gap-1.5">
-            <span id="tradeLastPrice" class="font-bold text-error text-lg tracking-tight">--</span>
-            <span id="tradeChangeBadge" class="text-error text-xs font-semibold px-1.5 py-0.5 bg-error-container/10 rounded">--</span>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 text-[12px] text-slate-300">
+            <p class="text-slate-400">支撑位</p>
+            <p id="supportPrice" class="mt-3 text-lg font-bold text-white">--</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 text-[12px] text-slate-300">
+            <p class="text-slate-400">压力位</p>
+            <p id="resistancePrice" class="mt-3 text-lg font-bold text-white">--</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 text-[12px] text-slate-300">
+            <p class="text-slate-400">止盈位</p>
+            <p id="takeProfitPrice" class="mt-3 text-lg font-bold text-emerald-400">--</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 text-[12px] text-slate-300">
+            <p class="text-slate-400">止损位</p>
+            <p id="stopLossPrice" class="mt-3 text-lg font-bold text-rose-400">--</p>
           </div>
         </div>
       </header>
 
-      <div class="flex-1 overflow-y-auto px-6 pb-24 hide-scrollbar">
-        <div class="bg-surface-container-low p-1.5 rounded-2xl flex mb-6">
-          <button id="tabBuy" class="flex-1 py-3.5 rounded-xl font-headline font-extrabold text-sm transition-all duration-200 bg-emerald-500 text-white shadow-sm">
-            Buy
-          </button>
-          <button id="tabSell" class="flex-1 py-3.5 rounded-xl font-headline font-bold text-sm text-rose-600 hover:text-rose-700 transition-all">
-            Sell
-          </button>
+      <div class="flex-1 overflow-y-auto px-6 pb-28 hide-scrollbar">
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <button id="tradeOpenLong" class="rounded-3xl py-3 text-sm font-black uppercase tracking-[0.14em] bg-emerald-500 text-white">开多</button>
+          <button id="tradeOpenShort" class="rounded-3xl py-3 text-sm font-black uppercase tracking-[0.14em] bg-slate-800 text-slate-400">开空</button>
         </div>
 
-        <div class="space-y-6">
-          <div class="flex items-center justify-between">
-            <button class="flex items-center gap-1 text-on-surface font-semibold text-sm">
-              Limit Order <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
-            </button>
-            <span class="material-symbols-outlined text-on-surface-variant text-lg">info</span>
-          </div>
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <button id="orderTypeLimit" class="rounded-3xl py-3 text-sm font-bold bg-slate-800 text-white">限价</button>
+          <button id="orderTypeMarket" class="rounded-3xl py-3 text-sm font-bold bg-slate-900/80 text-slate-400">市价</button>
+        </div>
 
-          <div class="space-y-2">
-            <div class="flex justify-between px-1">
-              <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Price</label>
-            </div>
-            <div class="relative flex items-center">
-              <input id="tradePriceInput" class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 font-headline font-bold text-lg focus:ring-2 focus:ring-primary-fixed" type="text" value="--" />
-              <span class="absolute right-5 font-bold text-on-surface-variant text-sm">USDT</span>
-            </div>
-          </div>
-
-          <div class="space-y-2">
-            <div class="flex justify-between px-1">
-              <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Amount</label>
-            </div>
-            <div class="relative flex items-center">
-              <input id="tradeAmountInput" class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 font-headline font-bold text-lg focus:ring-2 focus:ring-primary-fixed" placeholder="Min 10 XRP" type="text" />
-              <span id="tradeAmountUnit" class="absolute right-5 font-bold text-on-surface-variant text-sm">XRP</span>
-            </div>
-          </div>
-
-          <div class="space-y-4 pt-2">
-            <div class="flex justify-between items-center text-[12px] font-medium">
-              <span class="text-on-surface-variant">Available</span>
-              <span class="text-on-surface font-bold">1,000.00 USDT <span class="material-symbols-outlined text-[14px] align-middle ml-1 text-primary">add_circle</span></span>
-            </div>
-
-            <div class="relative h-8 flex items-center px-2">
-              <div class="absolute w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-                <div class="h-full bg-primary-container w-1/2"></div>
+        <div class="space-y-5">
+          <div>
+            <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">价格</p>
+            <div class="mt-3 rounded-3xl bg-slate-950/90 border border-slate-700 px-4 py-4 flex items-end justify-between gap-3">
+              <div>
+                <p id="tradeLastPrice" class="text-2xl font-black text-white">--</p>
+                <p id="tradeChangeBadge" class="mt-1 text-xs text-slate-400">--</p>
               </div>
-              <div class="absolute left-0 w-4 h-4 bg-primary rounded-full border-2 border-white shadow-md"></div>
-              <div class="absolute left-1/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
-              <div class="absolute left-1/2 -translate-x-1/2 w-5 h-5 bg-primary border-4 border-white shadow-lg rounded-full"></div>
-              <div class="absolute left-3/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
-              <div class="absolute right-0 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-4 gap-2">
-              <button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">25%</button>
-              <button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">50%</button>
-              <button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">75%</button>
-              <button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">100%</button>
+              <span class="text-sm text-slate-400">USDT</span>
             </div>
           </div>
 
-          <div class="bg-surface-container-low/50 p-4 rounded-xl space-y-2">
-            <div class="flex justify-between text-xs">
-              <span class="text-on-surface-variant">Transaction Fee</span>
-              <span id="tradeFee" class="text-on-surface font-semibold">0.1 XRP</span>
+          <div>
+            <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">杠杆倍数</p>
+            <div class="mt-3 rounded-3xl bg-slate-950/90 border border-slate-700 p-4">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-sm text-slate-400">最多 125x</span>
+                <span id="tradeLeverageValue" class="text-lg font-bold text-white">20x</span>
+              </div>
+              <input id="tradeLeverageRange" type="range" min="1" max="125" value="20" class="w-full accent-emerald-500" />
+              <div class="mt-3 flex items-center justify-between text-[11px] text-slate-500">
+                <span>1x</span>
+                <span>25x</span>
+                <span>50x</span>
+                <span>75x</span>
+                <span>125x</span>
+              </div>
             </div>
-            <div class="flex justify-between text-sm font-bold border-t border-outline-variant/10 pt-2">
-              <span class="text-on-surface">Estimated Total</span>
-              <span class="text-on-surface">-- USDT</span>
+          </div>
+
+          <div>
+            <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">价格</p>
+            <div class="mt-3 rounded-3xl bg-slate-950/90 border border-slate-700 px-4 py-4 flex items-center justify-between gap-3">
+              <input id="tradePriceInput" class="w-full bg-transparent border-none text-white text-lg font-black outline-none" type="text" placeholder="8.7700" />
+              <span class="text-sm text-slate-400">USDT</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-3xl bg-slate-950/90 border border-slate-700 px-4 py-4">
+              <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">初始保证金</p>
+              <p id="initialMargin" class="mt-3 text-lg font-bold text-white">0.00 USDT</p>
+            </div>
+            <div class="rounded-3xl bg-slate-950/90 border border-slate-700 px-4 py-4">
+              <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">可用余额</p>
+              <p id="availableBalance" class="mt-3 text-lg font-bold text-white">-- USDT</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-4 gap-2 text-xs text-slate-300">
+            <button id="percent25Btn" class="rounded-2xl bg-slate-800 py-3">25%</button>
+            <button id="percent50Btn" class="rounded-2xl bg-slate-800 py-3">50%</button>
+            <button id="percent75Btn" class="rounded-2xl bg-slate-800 py-3">75%</button>
+            <button id="percent100Btn" class="rounded-2xl bg-slate-800 py-3">100%</button>
+          </div>
+
+          <div class="rounded-3xl bg-slate-950/90 border border-slate-700 px-4 py-4 text-center">
+            <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">预计数量</p>
+            <p id="tradeQuantity" class="mt-3 text-3xl font-black text-white">0.0000 LINK</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-3xl bg-slate-950/90 border border-slate-700 p-4">
+              <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">止盈价</p>
+              <input id="tradeTakeProfitInput" class="mt-3 w-full bg-transparent border border-slate-700 rounded-2xl px-3 py-3 text-white outline-none" placeholder="止盈价" />
+            </div>
+            <div class="rounded-3xl bg-slate-950/90 border border-slate-700 p-4">
+              <p class="text-xs text-slate-400 uppercase tracking-[0.18em]">止损价</p>
+              <input id="tradeStopLossInput" class="mt-3 w-full bg-transparent border border-slate-700 rounded-2xl px-3 py-3 text-white outline-none" placeholder="止损价" />
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-950/90 border border-slate-700 p-4 space-y-3">
+            <div class="flex items-center justify-between text-sm text-slate-400">
+              <span>预计成本</span>
+              <span id="tradeCost">0.00 USDT</span>
+            </div>
+            <div class="flex items-center justify-between text-sm text-slate-400">
+              <span>预计手续费</span>
+              <span id="tradeExtraFee">0.0000 USDT</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="absolute bottom-0 left-0 right-0 px-6 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] bg-white border-t border-outline-variant/10">
-        <div class="flex flex-col gap-2">
-          <button id="tradeSubmitBtn" class="w-full py-4 bg-emerald-500 text-white rounded-2xl font-headline font-extrabold text-lg shadow-[0_12px_24px_-8px_rgba(16,185,129,0.45)] active:scale-[0.98] transition-all">
-            Buy XRP
+      <div class="absolute bottom-0 left-0 right-0 px-6 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] bg-[#08121f] border-t border-slate-800">
+        <div class="space-y-3">
+          <button id="tradeSubmitBtn" class="w-full rounded-3xl bg-emerald-500 py-4 text-lg font-black uppercase tracking-[0.06em] text-white shadow-[0_18px_45px_-18px_rgba(16,185,129,0.8)] transition-all active:scale-[0.98]">
+            确认下单（模拟盘）
           </button>
-          <p id="tradeHint" class="text-center text-[10px] font-bold text-on-surface-variant/65 uppercase tracking-[0.2em] pt-1">
-            Switch to <span class="text-error/40">Sell Tab</span> for dynamic controls
-          </p>
+          <p class="text-center text-[11px] text-slate-500">杠杆交易有风险，请谨慎操作</p>
         </div>
       </div>
     </div>
@@ -250,7 +264,7 @@
     const SITE_URL = 'https://blockcast.it/';
     const FEED_URL = 'https://blockcast.it/feed';
     const FEED_RSS_URL = 'https://blockcast.it/feed';
-    const SOURCE_URLS = [SITE_URL, FEED_URL];
+    const SOURCE_URLS = [FEED_URL];
     const FALLBACK_NEWS = [
       {
         title: '以太坊生态活跃度提升，链上资金持续流入',
@@ -280,17 +294,37 @@
     const tradeModalEl = document.getElementById('tradeModal');
     const tradeBackdropEl = document.getElementById('tradeBackdrop');
     const tradeCloseBtnEl = document.getElementById('tradeCloseBtn');
+    const tradeOpenModalBtnEl = document.getElementById('openTradeModalBtn');
+    const openAiAssistantInputEl = document.getElementById('openAiAssistantInput');
+    const aiAssistantInputEl = document.getElementById('aiAssistantInput');
+    const tradeModalPairEl = document.getElementById('tradeModalPair');
     const tradePairEl = document.getElementById('tradePair');
     const tradeLastPriceEl = document.getElementById('tradeLastPrice');
     const tradeChangeBadgeEl = document.getElementById('tradeChangeBadge');
     const tradePriceInputEl = document.getElementById('tradePriceInput');
-    const tradeAmountInputEl = document.getElementById('tradeAmountInput');
-    const tradeAmountUnitEl = document.getElementById('tradeAmountUnit');
+    const tradeLeverageRangeEl = document.getElementById('tradeLeverageRange');
+    const tradeLeverageValueEl = document.getElementById('tradeLeverageValue');
+    const initialMarginEl = document.getElementById('initialMargin');
+    const availableBalanceEl = document.getElementById('availableBalance');
+    const tradeQuantityEl = document.getElementById('tradeQuantity');
+    const tradeTakeProfitInputEl = document.getElementById('tradeTakeProfitInput');
+    const tradeStopLossInputEl = document.getElementById('tradeStopLossInput');
+    const takeProfitPriceEl = document.getElementById('takeProfitPrice');
+    const stopLossPriceEl = document.getElementById('stopLossPrice');
+    const supportPriceEl = document.getElementById('supportPrice');
+    const resistancePriceEl = document.getElementById('resistancePrice');
+    const tradeCostEl = document.getElementById('tradeCost');
+    const tradeExtraFeeEl = document.getElementById('tradeExtraFee');
     const tradeFeeEl = document.getElementById('tradeFee');
     const tradeSubmitBtnEl = document.getElementById('tradeSubmitBtn');
-    const tradeHintEl = document.getElementById('tradeHint');
-    const tabBuyEl = document.getElementById('tabBuy');
-    const tabSellEl = document.getElementById('tabSell');
+    const tradeOpenLongEl = document.getElementById('tradeOpenLong');
+    const tradeOpenShortEl = document.getElementById('tradeOpenShort');
+    const orderTypeLimitEl = document.getElementById('orderTypeLimit');
+    const orderTypeMarketEl = document.getElementById('orderTypeMarket');
+    const percent25BtnEl = document.getElementById('percent25Btn');
+    const percent50BtnEl = document.getElementById('percent50Btn');
+    const percent75BtnEl = document.getElementById('percent75Btn');
+    const percent100BtnEl = document.getElementById('percent100Btn');
 
     let marketMap = new Map();
     let marketStatus = {
@@ -481,51 +515,8 @@
       throw lastError || new Error('RSS 获取失败');
     }
 
-    async function fetchTextViaProxy(url) {
-      const requests = [
-        url,
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-        `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
-      ];
-
-      for (const reqUrl of requests) {
-        try {
-          const resp = await fetch(reqUrl, { cache: 'no-store' });
-          if (!resp.ok) continue;
-          if (reqUrl.includes('/get?url=')) {
-            const payload = await resp.json();
-            const content = payload?.contents || '';
-            if (content.length > 120) return content;
-          } else {
-            const text = await resp.text();
-            if (text.length > 120) return text;
-          }
-        } catch (_) {
-          // try next
-        }
-      }
-      throw new Error(`无法抓取: ${url}`);
-    }
-
     async function fetchNewsItems() {
-      for (const source of SOURCE_URLS) {
-        try {
-          const text = await fetchTextViaProxy(source);
-
-          try {
-            const parsedXml = extractNewsFromFeed(text, source);
-            if (parsedXml.length) return { news: parsedXml, source: `xml:${source}` };
-          } catch (_) {
-            // not xml
-          }
-
-          const parsedHtml = extractNewsFromHtml(text, source);
-          if (parsedHtml.length) return { news: parsedHtml, source: `html:${source}` };
-        } catch (_) {
-          // try next source
-        }
-      }
-
+      // Prefer RSS2JSON in browser runtime to avoid cross-origin blocking from site/proxy endpoints.
       try {
         const FEED_RSS2JSON_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}&count=12`;
         const resp = await fetch(FEED_RSS2JSON_URL, { cache: 'no-store' });
@@ -537,6 +528,26 @@
         }
       } catch (_) {
         // continue fallback chain
+      }
+
+      // Optional fallback attempt: direct feed request (works on some hosts/runtimes).
+      for (const source of SOURCE_URLS) {
+        try {
+          const resp = await fetch(source, { cache: 'no-store' });
+          if (!resp.ok) continue;
+          const text = await resp.text();
+          if (!text || text.length < 120) continue;
+
+          try {
+            const parsedXml = extractNewsFromFeed(text, source);
+            if (parsedXml.length) return { news: parsedXml, source: `xml:${source}` };
+          } catch (_) {
+            const parsedHtml = extractNewsFromHtml(text, source);
+            if (parsedHtml.length) return { news: parsedHtml, source: `html:${source}` };
+          }
+        } catch (_) {
+          // continue fallback chain
+        }
       }
 
       const fallback = FALLBACK_NEWS.map((item, index) => ({
@@ -614,53 +625,103 @@
       `;
     }
 
-    function applyTradeTabStyle(side) {
-      const isBuy = side === 'buy';
-      tabBuyEl.className = isBuy
-        ? 'flex-1 py-3.5 rounded-xl font-headline font-extrabold text-sm transition-all duration-200 bg-emerald-500 text-white shadow-sm'
-        : 'flex-1 py-3.5 rounded-xl font-headline font-bold text-sm text-emerald-600 hover:text-emerald-700 transition-all';
-      tabSellEl.className = !isBuy
-        ? 'flex-1 py-3.5 rounded-xl font-headline font-extrabold text-sm transition-all duration-200 bg-rose-500 text-white'
-        : 'flex-1 py-3.5 rounded-xl font-headline font-bold text-sm text-rose-600 hover:text-rose-700 transition-all';
+    function formatCalc(value, digits = 4) {
+      const num = Number(String(value).replace(/[^0-9.-]/g, ''));
+      if (!Number.isFinite(num)) return '--';
+      return num.toFixed(digits).replace(/\.?(0+)$/, '');
+    }
+
+    function safeNumber(value) {
+      const num = Number(String(value).replace(/[^0-9.-]/g, ''));
+      return Number.isFinite(num) ? num : NaN;
+    }
+
+    function setTradePercent(percent) {
+      currentTrade.percent = percent;
+      updateTradeCalculations();
+      [percent25BtnEl, percent50BtnEl, percent75BtnEl, percent100BtnEl].forEach((button, index) => {
+        if (!button) return;
+        const target = [0.25, 0.5, 0.75, 1][index];
+        button.className = target === percent
+          ? 'rounded-2xl bg-emerald-500 py-3 text-xs text-white'
+          : 'rounded-2xl bg-slate-800 py-3 text-xs text-slate-300';
+      });
+    }
+
+    function updateTradeCalculations() {
+      const price = safeNumber(tradePriceInputEl.value);
+      const leverage = Number(currentTrade.leverage) || 20;
+      const percent = Number(currentTrade.percent) || 0.75;
+      const balance = 1000;
+      const targetValue = balance * percent;
+      const quantity = price > 0 ? targetValue / price : 0;
+      const cost = price > 0 ? quantity * price : 0;
+      const fee = cost * 0.0005;
+      const support = price > 0 ? price * 0.986 : NaN;
+      const resistance = price > 0 ? price * 1.014 : NaN;
+      const takeProfit = price > 0 ? price * (currentTrade.side === 'sell' ? 0.96 : 1.04) : NaN;
+      const stopLoss = price > 0 ? price * (currentTrade.side === 'sell' ? 1.02 : 0.98) : NaN;
+
+      initialMarginEl.textContent = price > 0 ? `${formatCalc(targetValue / leverage, 2)} USDT` : '0.00 USDT';
+      availableBalanceEl.textContent = `${formatCalc(balance, 2)} USDT`;
+      tradeQuantityEl.textContent = `${formatCalc(quantity, 4)} ${currentTrade.symbol}`;
+      tradeCostEl.textContent = price > 0 ? `${formatCalc(cost, 2)} USDT` : '0.00 USDT';
+      tradeExtraFeeEl.textContent = price > 0 ? `${formatCalc(fee, 4)} USDT` : '0.0000 USDT';
+      tradeFeeEl && (tradeFeeEl.textContent = price > 0 ? `${formatCalc(fee / price, 4)} ${currentTrade.symbol}` : `0.0000 ${currentTrade.symbol}`);
+      supportPriceEl.textContent = price > 0 ? formatCalc(support, 4) : '--';
+      resistancePriceEl.textContent = price > 0 ? formatCalc(resistance, 4) : '--';
+      takeProfitPriceEl.textContent = price > 0 ? formatCalc(takeProfit, 4) : '--';
+      stopLossPriceEl.textContent = price > 0 ? formatCalc(stopLoss, 4) : '--';
+      tradeTakeProfitInputEl.value = price > 0 ? formatCalc(takeProfit, 4) : '';
+      tradeStopLossInputEl.value = price > 0 ? formatCalc(stopLoss, 4) : '';
     }
 
     function applyTradeState() {
       const pair = `${currentTrade.symbol}/USDT`;
-      const sideLabel = currentTrade.side === 'buy' ? 'Buy' : 'Sell';
       const cleanPrice = String(currentTrade.price || '--').replace('$', '');
       const changeNum = Number(String(currentTrade.change).replace('%', ''));
+      const isPositive = Number.isFinite(changeNum) ? changeNum >= 0 : null;
 
-      tradePairEl.textContent = pair;
+      tradeModalPairEl.textContent = pair.replace('/', '');
+      tradePairEl && (tradePairEl.textContent = pair);
       tradeLastPriceEl.className = Number.isFinite(changeNum)
-        ? `font-bold text-lg tracking-tight ${changeNum >= 0 ? 'text-emerald-700' : 'text-error'}`
-        : 'font-bold text-on-surface-variant text-lg tracking-tight';
-      tradeLastPriceEl.textContent = cleanPrice;
+        ? `text-2xl font-black ${isPositive ? 'text-emerald-400' : 'text-rose-400'}`
+        : 'text-2xl font-black text-white';
+      tradeLastPriceEl.textContent = cleanPrice === '--' ? '--' : cleanPrice;
       tradeChangeBadgeEl.className = Number.isFinite(changeNum)
-        ? (changeNum >= 0
-          ? 'text-emerald-700 text-xs font-semibold px-1.5 py-0.5 bg-emerald-100 rounded'
-          : 'text-error text-xs font-semibold px-1.5 py-0.5 bg-error-container/10 rounded')
-        : 'text-on-surface-variant text-xs font-semibold px-1.5 py-0.5 bg-surface-container-low rounded';
-      tradeChangeBadgeEl.textContent = currentTrade.change;
-      tradePriceInputEl.value = cleanPrice;
-      tradeAmountInputEl.placeholder = `Min 10 ${currentTrade.symbol}`;
-      tradeAmountUnitEl.textContent = currentTrade.symbol;
-      tradeFeeEl.textContent = `0.1 ${currentTrade.symbol}`;
-      tradeSubmitBtnEl.textContent = `${sideLabel} ${currentTrade.symbol}`;
-      tradeSubmitBtnEl.className = currentTrade.side === 'buy'
-        ? 'w-full py-4 bg-emerald-500 text-white rounded-2xl font-headline font-extrabold text-lg shadow-[0_12px_24px_-8px_rgba(16,185,129,0.45)] active:scale-[0.98] transition-all'
-        : 'w-full py-4 bg-rose-500 text-white rounded-2xl font-headline font-extrabold text-lg shadow-[0_12px_24px_-8px_rgba(244,63,94,0.4)] active:scale-[0.98] transition-all';
-      tradeHintEl.innerHTML = currentTrade.side === 'buy'
-        ? 'Switch to <span class="text-rose-400">Sell Tab</span> for dynamic controls'
-        : 'Switch to <span class="text-emerald-500">Buy Tab</span> for dynamic controls';
-      applyTradeTabStyle(currentTrade.side);
+        ? `mt-1 text-xs ${isPositive ? 'text-emerald-400' : 'text-rose-400'}`
+        : 'mt-1 text-xs text-slate-400';
+      tradeChangeBadgeEl.textContent = Number.isFinite(changeNum) ? `${changeNum >= 0 ? '+' : ''}${changeNum.toFixed(2)}%` : '--';
+      tradeLeverageValueEl.textContent = `${currentTrade.leverage || 20}x`;
+      if (tradePriceInputEl) {
+        tradePriceInputEl.value = cleanPrice === '--' ? '' : cleanPrice;
+      }
+      setTradePercent(currentTrade.percent || 0.75);
+      tradeOpenLongEl.className = currentTrade.side === 'buy'
+        ? 'rounded-3xl py-3 text-sm font-black uppercase tracking-[0.14em] bg-emerald-500 text-white'
+        : 'rounded-3xl py-3 text-sm font-black uppercase tracking-[0.14em] bg-slate-800 text-slate-400';
+      tradeOpenShortEl.className = currentTrade.side === 'sell'
+        ? 'rounded-3xl py-3 text-sm font-black uppercase tracking-[0.14em] bg-rose-500 text-white'
+        : 'rounded-3xl py-3 text-sm font-black uppercase tracking-[0.14em] bg-slate-800 text-slate-400';
+      orderTypeLimitEl.className = currentTrade.orderType === 'limit'
+        ? 'rounded-3xl py-3 text-sm font-bold bg-slate-800 text-white'
+        : 'rounded-3xl py-3 text-sm font-bold bg-slate-900/80 text-slate-400';
+      orderTypeMarketEl.className = currentTrade.orderType === 'market'
+        ? 'rounded-3xl py-3 text-sm font-bold bg-slate-800 text-white'
+        : 'rounded-3xl py-3 text-sm font-bold bg-slate-900/80 text-slate-400';
+      tradeSubmitBtnEl.textContent = `确认下单（模拟盘）`;
+      updateTradeCalculations();
     }
 
-    function openTradeModal({ side, symbol, price, change }) {
+    function openTradeModal({ side, symbol, price, change, orderType }) {
       currentTrade = {
         side: side === 'sell' ? 'sell' : 'buy',
         symbol: baseSymbol(symbol || 'BTC') || 'BTC',
         price: price || '--',
-        change: change || '--'
+        change: change || '--',
+        orderType: orderType === 'market' ? 'market' : 'limit',
+        leverage: currentTrade.leverage || 20,
+        percent: currentTrade.percent || 0.75
       };
       applyTradeState();
       tradeModalEl.classList.add('open');
@@ -793,7 +854,8 @@
           side: recommendSide,
           symbol: newsItem.recommend,
           price: priceValue,
-          change: changeValue
+          change: changeValue,
+          orderType: 'limit'
         });
       });
 
@@ -846,13 +908,60 @@
     if (refreshBtn) refreshBtn.addEventListener('click', loadPageData);
     tradeBackdropEl.addEventListener('click', closeTradeModal);
     tradeCloseBtnEl.addEventListener('click', closeTradeModal);
-    tabBuyEl.addEventListener('click', () => {
+    if (openAiAssistantInputEl) {
+      openAiAssistantInputEl.addEventListener('click', () => {
+        window.location.href = 'ai-chat.html';
+      });
+    }
+    if (aiAssistantInputEl) {
+      aiAssistantInputEl.addEventListener('focus', () => {
+        window.location.href = 'ai-chat.html';
+      });
+    }
+    if (tradeOpenModalBtnEl) {
+      tradeOpenModalBtnEl.addEventListener('click', () => openTradeModal({ side: 'buy', symbol: 'LINK', price: '--', change: '--', orderType: 'market' }));
+    }
+    tradeOpenLongEl.addEventListener('click', () => {
       currentTrade.side = 'buy';
       applyTradeState();
     });
-    tabSellEl.addEventListener('click', () => {
+    tradeOpenShortEl.addEventListener('click', () => {
       currentTrade.side = 'sell';
       applyTradeState();
+    });
+    orderTypeLimitEl.addEventListener('click', () => {
+      currentTrade.orderType = 'limit';
+      applyTradeState();
+    });
+    orderTypeMarketEl.addEventListener('click', () => {
+      currentTrade.orderType = 'market';
+      applyTradeState();
+    });
+    if (tradePriceInputEl) {
+      tradePriceInputEl.addEventListener('input', updateTradeCalculations);
+    }
+    if (tradeTakeProfitInputEl) {
+      tradeTakeProfitInputEl.addEventListener('input', () => {
+        if (!takeProfitPriceEl) return;
+        const custom = safeNumber(tradeTakeProfitInputEl.value);
+        takeProfitPriceEl.textContent = Number.isFinite(custom) ? formatCalc(custom, 4) : '--';
+      });
+    }
+    if (tradeStopLossInputEl) {
+      tradeStopLossInputEl.addEventListener('input', () => {
+        if (!stopLossPriceEl) return;
+        const custom = safeNumber(tradeStopLossInputEl.value);
+        stopLossPriceEl.textContent = Number.isFinite(custom) ? formatCalc(custom, 4) : '--';
+      });
+    }
+    if (percent25BtnEl) percent25BtnEl.addEventListener('click', () => setTradePercent(0.25));
+    if (percent50BtnEl) percent50BtnEl.addEventListener('click', () => setTradePercent(0.5));
+    if (percent75BtnEl) percent75BtnEl.addEventListener('click', () => setTradePercent(0.75));
+    if (percent100BtnEl) percent100BtnEl.addEventListener('click', () => setTradePercent(1));
+    tradeLeverageRangeEl.addEventListener('input', () => {
+      currentTrade.leverage = Number(tradeLeverageRangeEl.value) || 20;
+      tradeLeverageValueEl.textContent = `${currentTrade.leverage}x`;
+      updateTradeCalculations();
     });
     tradeSubmitBtnEl.addEventListener('click', () => {
       closeTradeModal();

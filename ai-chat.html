@@ -3,580 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI助手对话</title>
+  <title>AI助手</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .font-headline { font-family: 'Manrope', sans-serif; }
+    body { font-family: "Inter", sans-serif; }
+    .font-headline { font-family: "Manrope", sans-serif; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24; }
     .status-bar-safe { padding-top: env(safe-area-inset-top); }
     .bottom-safe { padding-bottom: env(safe-area-inset-bottom); }
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
+    .tag-chip.active { border-color: #ffffff; box-shadow: 0 0 0 2px rgba(255,255,255,0.15); }
   </style>
 </head>
 <body class="bg-[#f5f6f7] text-[#2c2f30] min-h-screen">
-  <header class="status-bar-safe sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
-    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="code.html" class="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-gray-900">
-        <span>←</span>
-        <span>返回</span>
-      </a>
-      <div class="text-center">
-        <p class="font-headline font-extrabold tracking-tight">AI助手</p>
-        <p class="text-[11px] text-gray-400">zhidao.com</p>
+  <main class="status-bar-safe min-h-screen flex flex-col">
+    <section class="flex-1 flex flex-col items-center justify-center px-4 pt-10 pb-8">
+      <div class="w-24 h-24 rounded-full bg-gradient-to-br from-sky-200 via-indigo-200 to-purple-200 p-1.5 shadow-[0_0_36px_rgba(255,255,255,0.2)]">
+        <div class="w-full h-full rounded-full bg-[#0f172a] flex items-center justify-center text-5xl">🤖</div>
       </div>
-      <div class="w-8"></div>
-    </div>
-  </header>
 
-  <main class="max-w-3xl mx-auto px-4 py-5 pb-40 space-y-3">
-    <div class="flex items-start gap-3">
-      <div class="w-9 h-9 rounded-xl bg-[#FFD308] text-[#5a4900] flex items-center justify-center font-headline font-extrabold">AI</div>
-      <div class="max-w-[96%] bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm border border-gray-100">
-        <p class="text-sm text-gray-700 leading-6">按文档结构返回：每个场景均以“提问 + 对应模块回答”展示。</p>
-      </div>
-    </div>
+      <h1 class="mt-8 text-3xl md:text-5xl font-headline font-extrabold tracking-tight text-[#1f2329] text-center">你好~ 我什么都知道</h1>
+      <p class="mt-3 text-base md:text-xl text-[#4b5563] font-semibold text-center">您的行情助手，随时为您解答加密货币相关问题</p>
 
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">BTC 现在什么价格？</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h2 class="font-headline font-extrabold text-base">询问BTC价格</h2></div>
-      <div class="p-4">
-        <div class="overflow-hidden rounded-xl border border-gray-200">
-          <table class="w-full text-sm">
-            <thead class="bg-gray-50 text-gray-500"><tr><th class="text-left font-semibold px-3 py-2 border-b border-gray-200">指标</th><th class="text-left font-semibold px-3 py-2 border-b border-gray-200">数值</th></tr></thead>
-            <tbody>
-              <tr><td class="px-3 py-2 border-b border-gray-100">流通市值</td><td class="px-3 py-2 border-b border-gray-100">$1.4万亿</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">流通供应量</td><td class="px-3 py-2 border-b border-gray-100">1,998.27万</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">总市值</td><td class="px-3 py-2 border-b border-gray-100">$1.4万亿</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">总供应量</td><td class="px-3 py-2 border-b border-gray-100">1,998.27万</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">市场占有率</td><td class="px-3 py-2 border-b border-gray-100">59.12%</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">上市时间</td><td class="px-3 py-2 border-b border-gray-100">2008-10-31</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">市值排名</td><td class="px-3 py-2 border-b border-gray-100">#1</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">24小时交易量</td><td class="px-3 py-2 border-b border-gray-100">50.59万</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">24小时振幅</td><td class="px-3 py-2 border-b border-gray-100">3.11%</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">24小时最高</td><td class="px-3 py-2 border-b border-gray-100">$72,026.09</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">24小时最低</td><td class="px-3 py-2 border-b border-gray-100">$69,855.73</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">历史最高点</td><td class="px-3 py-2 border-b border-gray-100">$126,198.07</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">历史最低点</td><td class="px-3 py-2 border-b border-gray-100">$0.05</td></tr>
-              <tr><td class="px-3 py-2">持币地址</td><td class="px-3 py-2">49,562,383</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <a href="Image%202.html" class="inline-block mt-3 text-xs font-semibold text-[#6e5a00] bg-[#fff6cc] px-3 py-1.5 rounded-full">点击行情，对应币种的「行情」tab</a>
-      </div>
-    </section>
-
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">现在贪婪指数是多少？</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h3 class="font-headline font-extrabold text-base">询问贪婪指数</h3></div>
-      <div class="p-4 space-y-3 text-sm">
-        <div class="rounded-xl border border-gray-200 p-3"><p class="font-semibold">恐慌与贪婪指数</p><p>当前指数：10</p><p class="text-red-600 font-semibold">状态：极度恐慌</p></div>
-        <div class="rounded-xl border border-gray-200 p-3"><p class="font-semibold mb-1">解读</p><p>投资者避险情绪强；市场可能已经历较大抛压；短期可能反弹但不代表立刻见底。</p></div>
-        <div class="rounded-xl border border-gray-200 p-3 text-xs text-gray-600"><p>昨天：14</p><p>7天前：11</p><p>30天前：11</p></div>
-        <p class="text-sm text-gray-700">目前市场情绪处于明显低位，偏向恐慌区间。结合 BTC 价格、成交量、清算地图和多空比更适合判断短线机会。</p>
-        <a href="Image%202.html" class="inline-block text-xs font-semibold text-[#6e5a00] bg-[#fff6cc] px-3 py-1.5 rounded-full">点击可进入，对应币种的「行情」tab</a>
-      </div>
-    </section>
-
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">BTC 市场交易给我看下。</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h3 class="font-headline font-extrabold text-base">询问BTC市场交易</h3></div>
-      <div class="p-4">
-        <div class="overflow-hidden rounded-xl border border-gray-200">
-          <table class="w-full text-xs">
-            <thead class="bg-gray-50 text-gray-500"><tr><th class="text-left px-3 py-2 border-b border-gray-200">交易所</th><th class="text-left px-3 py-2 border-b border-gray-200">最新价</th><th class="text-left px-3 py-2 border-b border-gray-200">24小时成交额</th></tr></thead>
-            <tbody>
-              <tr><td class="px-3 py-2 border-b border-gray-100">Binance币安</td><td class="px-3 py-2 border-b border-gray-100">$70,057.9</td><td class="px-3 py-2 border-b border-gray-100">$120.09亿</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">OKX欧易</td><td class="px-3 py-2 border-b border-gray-100">$70,063.5</td><td class="px-3 py-2 border-b border-gray-100">$69.3亿</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">Bybit</td><td class="px-3 py-2 border-b border-gray-100">$70,054</td><td class="px-3 py-2 border-b border-gray-100">$57.79亿</td></tr>
-              <tr><td class="px-3 py-2 border-b border-gray-100">芝麻开门</td><td class="px-3 py-2 border-b border-gray-100">$70,060</td><td class="px-3 py-2 border-b border-gray-100">$52.19亿</td></tr>
-              <tr><td class="px-3 py-2">Bitget</td><td class="px-3 py-2">$70,066.1</td><td class="px-3 py-2">$36.85亿</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <a href="Image%202.html" class="inline-block mt-3 text-xs font-semibold text-[#6e5a00] bg-[#fff6cc] px-3 py-1.5 rounded-full">点击可进入，对应币种的「交易所」tab</a>
-      </div>
-    </section>
-
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">最近爆仓数据呢？</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h3 class="font-headline font-extrabold text-base">询问爆仓</h3></div>
-      <div class="p-4 space-y-3">
-        <div class="grid grid-cols-2 gap-2.5 text-xs">
-          <div class="rounded-xl bg-[#f7f8fa] border border-gray-200 p-3">
-            <p class="font-semibold text-gray-800">1小时 <span class="float-right text-gray-900">$40.32万</span></p>
-            <p class="mt-2 text-emerald-600 font-semibold">多单 <span class="float-right">$24.46万</span></p>
-            <p class="mt-1 text-rose-500 font-semibold">空单 <span class="float-right">$15.85万</span></p>
-          </div>
-          <div class="rounded-xl bg-[#f7f8fa] border border-gray-200 p-3">
-            <p class="font-semibold text-gray-800">4小时 <span class="float-right text-gray-900">$297.04万</span></p>
-            <p class="mt-2 text-emerald-600 font-semibold">多单 <span class="float-right">$263.89万</span></p>
-            <p class="mt-1 text-rose-500 font-semibold">空单 <span class="float-right">$33.15万</span></p>
-          </div>
-          <div class="rounded-xl bg-[#f7f8fa] border border-gray-200 p-3">
-            <p class="font-semibold text-gray-800">12小时 <span class="float-right text-gray-900">$495.03万</span></p>
-            <p class="mt-2 text-emerald-600 font-semibold">多单 <span class="float-right">$365.26万</span></p>
-            <p class="mt-1 text-rose-500 font-semibold">空单 <span class="float-right">$129.77万</span></p>
-          </div>
-          <div class="rounded-xl bg-[#f7f8fa] border border-gray-200 p-3">
-            <p class="font-semibold text-gray-800">24小时 <span class="float-right text-gray-900">$1,740.46万</span></p>
-            <p class="mt-2 text-emerald-600 font-semibold">多单 <span class="float-right">$1,025.44万</span></p>
-            <p class="mt-1 text-rose-500 font-semibold">空单 <span class="float-right">$715.03万</span></p>
-          </div>
-        </div>
-
-        <div class="rounded-xl border border-gray-200 p-3 text-xs text-gray-700 bg-white">
-          <p>• 最近 24 小时，共有 <span class="font-semibold text-gray-900">2739</span> 人爆仓，爆仓总金额为 <span class="font-semibold text-[#b58c00]">$1,740.46万</span></p>
-          <p class="mt-1">• 最大单笔爆仓单发生在 <span class="font-semibold text-[#b58c00]">okx-BTC</span>，单笔价值 <span class="font-semibold text-[#b58c00]">$52.74万</span></p>
-        </div>
-
-        <div class="rounded-xl border border-gray-200 overflow-hidden">
-          <div class="px-3 py-2 bg-gray-50 border-b border-gray-200 text-sm font-semibold">单笔爆仓 Top3</div>
-          <div class="px-3 py-2 text-xs grid grid-cols-5 text-gray-500">
-            <span>#</span><span>交易所</span><span>币种</span><span>多空比</span><span class="text-right">金额</span>
-          </div>
-          <div class="px-3 py-2 text-xs grid grid-cols-5 border-t border-gray-100">
-            <span>1</span><span>okx</span><span>BTC</span><span class="text-rose-500 font-semibold">空</span><span class="text-right text-rose-500 font-semibold">$52.74万</span>
-          </div>
-        </div>
-
-        <div class="rounded-xl border border-gray-200 p-3 bg-[#fafafa]">
-          <p class="text-[28px] font-headline font-extrabold tracking-tight mb-4">爆仓比例</p>
-          <div class="flex items-start gap-3">
-            <div class="w-12 text-[14px] text-gray-500 leading-[2.4] pt-1">
-              <p>100%</p>
-              <p>80%</p>
-              <p>60%</p>
-              <p>40%</p>
-              <p>20%</p>
-            </div>
-            <div class="flex-1">
-              <div class="h-64 flex items-end gap-2">
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:30%;background:#57c48d"></div><div style="height:70%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:25%;background:#57c48d"></div><div style="height:75%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:50%;background:#57c48d"></div><div style="height:50%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:82%;background:#57c48d"></div><div style="height:18%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:74%;background:#57c48d"></div><div style="height:26%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:68%;background:#57c48d"></div><div style="height:32%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:46%;background:#57c48d"></div><div style="height:54%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:35%;background:#57c48d"></div><div style="height:65%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:56%;background:#57c48d"></div><div style="height:44%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:46%;background:#57c48d"></div><div style="height:54%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:28%;background:#57c48d"></div><div style="height:72%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:77%;background:#57c48d"></div><div style="height:23%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:18%;background:#57c48d"></div><div style="height:82%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:28%;background:#57c48d"></div><div style="height:72%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:32%;background:#57c48d"></div><div style="height:68%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:82%;background:#57c48d"></div><div style="height:18%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:74%;background:#57c48d"></div><div style="height:26%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:66%;background:#57c48d"></div><div style="height:34%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:40%;background:#57c48d"></div><div style="height:60%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:90%;background:#57c48d"></div><div style="height:10%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:43%;background:#57c48d"></div><div style="height:57%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:49%;background:#57c48d"></div><div style="height:51%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:29%;background:#57c48d"></div><div style="height:71%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:73%;background:#57c48d"></div><div style="height:27%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:79%;background:#57c48d"></div><div style="height:21%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:40%;background:#57c48d"></div><div style="height:60%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:63%;background:#57c48d"></div><div style="height:37%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:45%;background:#57c48d"></div><div style="height:55%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:41%;background:#57c48d"></div><div style="height:59%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:36%;background:#57c48d"></div><div style="height:64%;background:#e86b80"></div></div>
-                <div class="w-4 h-full rounded-full overflow-hidden" style="background:#f7f7f8"><div style="height:74%;background:#57c48d"></div><div style="height:26%;background:#000"></div></div>
-              </div>
-              <div class="mt-4 grid grid-cols-6 text-[12px] text-gray-500">
-                <span>03/03</span>
-                <span class="text-center">03/08</span>
-                <span class="text-center">03/14</span>
-                <span class="text-center">03/21</span>
-                <span class="text-center">03/27</span>
-                <span class="text-right">04/02</span>
-              </div>
-              <div class="mt-6 flex items-center justify-center gap-8 text-sm">
-                <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-emerald-500"></span><span class="text-gray-600">多单</span></div>
-                <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-rose-500"></span><span class="text-gray-600">空单</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <a href="Image%202.html" class="inline-block text-xs font-semibold text-[#6e5a00] bg-[#fff6cc] px-3 py-1.5 rounded-full">点击可进入，对应币种的多空爆仓tab</a>
-      </div>
-    </section>
-
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">BTC 多空比是什么情况？</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h3 class="font-headline font-extrabold text-base">询问BTC多空比</h3></div>
-      <div class="p-4 space-y-3">
-        <div class="rounded-xl border border-gray-200 p-3 space-y-2.5 bg-[#fcfcfd]">
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">BN</span>
-              <span class="font-semibold text-sm">Binance</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">48.49%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">51.51%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">OK</span>
-              <span class="font-semibold text-sm">OKX</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">47.47%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">52.53%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">BY</span>
-              <span class="font-semibold text-sm">Bybit</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">47.77%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">52.23%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">KC</span>
-              <span class="font-semibold text-sm">KuCoin</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">49.60%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">50.40%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">GT</span>
-              <span class="font-semibold text-sm">Gate</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">47.42%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">52.58%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">BG</span>
-              <span class="font-semibold text-sm">Bitget</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">50.52%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">49.48%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">BX</span>
-              <span class="font-semibold text-sm">BingX</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">48.40%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">51.60%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">MX</span>
-              <span class="font-semibold text-sm">MEXC</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">51.04%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">48.96%</div>
-            </div>
-          </div>
-          <div class="grid grid-cols-[1fr_1.6fr] items-center gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-[#f3f4f6] text-[10px] font-bold flex items-center justify-center">BU</span>
-              <span class="font-semibold text-sm">Bitunix</span>
-            </div>
-            <div class="h-9 rounded-full overflow-hidden flex border border-[#e8e8ea]">
-              <div class="w-1/2 bg-[#99e2cd] text-[#16342c] text-sm font-semibold flex items-center justify-center">48.37%</div>
-              <div class="w-1/2 bg-[#f4b8c1] text-[#4a1f28] text-sm font-semibold flex items-center justify-center">51.63%</div>
-            </div>
-          </div>
-        </div>
-        <p class="text-sm text-gray-700">整体来看空头略占优，多数交易所空单比例高于多单。只有 Bitget、MEXC 的多单占比略高，短线情绪偏谨慎。</p>
-        <a href="Image%202.html" class="inline-block text-xs font-semibold text-[#6e5a00] bg-[#fff6cc] px-3 py-1.5 rounded-full">点击可进入，对应币种的多空比tab</a>
-      </div>
-    </section>
-
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">给我 BTC 的新闻。</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h3 class="font-headline font-extrabold text-base">询问BTC的新闻</h3></div>
-      <div class="p-4 space-y-3">
-        <p class="text-sm text-gray-700">新闻范围概览：直接调用无图片新闻列表，可点击进入详情。</p>
-        <div class="divide-y divide-gray-100 border border-gray-200 rounded-xl overflow-hidden">
-          <a href="https://www.chaincatcher.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 hover:bg-gray-50"><p class="text-sm font-semibold">比特币短线回升，市场关注恐慌指数修复</p><p class="text-xs text-gray-500 mt-1">04-02 17:30</p></a>
-          <a href="https://www.chaincatcher.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 hover:bg-gray-50"><p class="text-sm font-semibold">交易所 BTC 净流入放缓，清算压力阶段性下降</p><p class="text-xs text-gray-500 mt-1">04-02 16:12</p></a>
-          <a href="https://www.chaincatcher.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 hover:bg-gray-50"><p class="text-sm font-semibold">机构持仓稳步增长，多空比接近中性区间</p><p class="text-xs text-gray-500 mt-1">04-02 14:48</p></a>
-        </div>
-      </div>
-    </section>
-
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">那 BTC 重要事件时间轴呢？</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h3 class="font-headline font-extrabold text-base">询问BTC的重要事件</h3></div>
-      <div class="p-4 space-y-3">
-        <div class="relative pl-4 border-l-2 border-gray-200"><p class="text-xs text-gray-500">2026-04-02 12:00</p><p class="text-sm">BTC 24小时振幅扩大到 3.11%</p></div>
-        <div class="relative pl-4 border-l-2 border-gray-200"><p class="text-xs text-gray-500">2026-04-02 09:30</p><p class="text-sm">贪婪指数维持低位，市场情绪偏恐慌</p></div>
-        <div class="relative pl-4 border-l-2 border-gray-200"><p class="text-xs text-gray-500">2026-04-01 21:00</p><p class="text-sm">主要交易所 BTC 成交额持续放大</p></div>
-        <a href="Image%202.html" class="inline-block text-xs font-semibold text-[#6e5a00] bg-[#fff6cc] px-3 py-1.5 rounded-full">点击可进入，对应币种的「重要大事」tab</a>
-      </div>
-    </section>
-
-    <div class="flex justify-end"><div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">介绍一下 BTC。</div></div>
-    <section class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/70"><h3 class="font-headline font-extrabold text-base">询问BTC的介绍</h3></div>
-      <div class="p-4 space-y-3">
-        <div class="overflow-hidden rounded-xl border border-gray-200">
-          <table class="w-full text-xs"><tbody>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">代币排名</td><td class="px-3 py-2 border-b border-gray-100">No.1</td></tr>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">所属公链</td><td class="px-3 py-2 border-b border-gray-100">Bitcoin</td></tr>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">持币地址数</td><td class="px-3 py-2 border-b border-gray-100">49,562,383</td></tr>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">最大供应量</td><td class="px-3 py-2 border-b border-gray-100">2,100万 BTC</td></tr>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">流通量</td><td class="px-3 py-2 border-b border-gray-100">1,998.27万 BTC</td></tr>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">总市值</td><td class="px-3 py-2 border-b border-gray-100">$1.4万亿</td></tr>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">流通市值</td><td class="px-3 py-2 border-b border-gray-100">$1.4万亿</td></tr>
-            <tr><td class="px-3 py-2 border-b border-gray-100 text-gray-500">流通率</td><td class="px-3 py-2 border-b border-gray-100">100%</td></tr>
-            <tr><td class="px-3 py-2 text-gray-500">上市时间</td><td class="px-3 py-2">2008-10-31</td></tr>
-          </tbody></table>
-        </div>
-        <p class="text-sm text-gray-700">比特币被定位为一种去中心化的点对点电子现金系统，核心目标是用区块链技术实现资产自主掌控与自由流动。</p>
-        <a href="Image%202.html" class="inline-block text-xs font-semibold text-[#6e5a00] bg-[#fff6cc] px-3 py-1.5 rounded-full">点击可进入，对应币种的「关于」tab</a>
-      </div>
-    </section>
-
-  </main>
-
-  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 bottom-safe z-50 flex flex-col items-center pb-4 pt-2">
-    <div class="flex items-center justify-around w-full max-w-md px-6 py-2 mb-2">
-      <button class="relative flex flex-col items-center justify-center">
-        <span class="material-symbols-outlined text-2xl text-gray-800" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
-        <div class="absolute -bottom-1 w-8 h-1 bg-[#ffd308] rounded-full"></div>
-      </button>
-      <button class="text-gray-400 flex flex-col items-center justify-center">
-        <span class="text-lg font-bold">发现</span>
-      </button>
-      <button class="text-gray-400 flex items-center justify-center">
-        <span class="material-symbols-outlined text-2xl">notifications</span>
-      </button>
-      <button class="text-gray-400 flex items-center justify-center">
-        <span class="material-symbols-outlined text-2xl text-[28px]">expand_circle_down</span>
-      </button>
-    </div>
-    <div class="flex items-center justify-between w-full px-4 gap-3">
-      <button class="w-12 h-12 flex-shrink-0 border border-gray-300 rounded-full flex items-center justify-center bg-white shadow-sm">
-        <span class="text-xs font-medium text-gray-500">交易</span>
-      </button>
-      <div class="flex-grow h-12 bg-white rounded-full border border-gray-300 px-4 flex items-center gap-3 shadow-sm">
-        <span class="material-symbols-outlined text-blue-500 text-xl">mic</span>
-        <input id="chatInput" class="flex-grow text-sm border-none focus:ring-0 p-0 text-gray-500 bg-transparent" placeholder="提问或搜索" type="text"/>
-        <button id="chatSendTrigger" class="flex items-center justify-center">
-          <span class="material-symbols-outlined text-gray-400 text-xl">grid_view</span>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <button class="tag-chip active inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm md:text-lg font-semibold text-[#323843] border border-gray-200">
+          <span class="text-red-500">🔥</span>热门趋势
         </button>
+        <button class="tag-chip inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm md:text-lg font-semibold text-[#323843] border border-gray-200"><span class="text-amber-500">🪙</span>加密货币</button>
+        <button class="tag-chip inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm md:text-lg font-semibold text-[#323843] border border-gray-200"><span class="text-blue-500">🌎</span>宏观</button>
+        <button class="tag-chip inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm md:text-lg font-semibold text-[#323843] border border-gray-200"><span class="text-rose-400">♡</span>市场情绪</button>
+        <button class="tag-chip inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm md:text-lg font-semibold text-[#323843] border border-gray-200"><span class="text-violet-500">⛓</span>工作链</button>
+        <button class="tag-chip inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm md:text-lg font-semibold text-[#323843] border border-gray-200"><span class="text-indigo-500">🧭</span>预测市场</button>
+        <button class="tag-chip inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm md:text-lg font-semibold text-[#323843] border border-gray-200"><span class="text-emerald-500">✧</span>学习</button>
       </div>
-      <button class="w-12 h-12 flex-shrink-0 border border-gray-300 rounded-full flex items-center justify-center bg-white shadow-sm">
-        <span class="text-xs font-medium text-gray-500">行情</span>
-      </button>
-    </div>
-    <p class="text-[10px] text-gray-400 mt-2">内容由AI生成，不构成投资建议</p>
-  </div>
-  <script>
-    document.querySelectorAll("main > section").forEach((section) => {
-      section.classList.add("bg-gradient-to-b", "from-white", "to-[#fbfcfd]", "border-gray-200", "shadow-[0_8px_22px_rgba(15,23,42,0.05)]");
 
-      const titleText = section.querySelector("h2, h3")?.textContent || "";
-      const signalMap = {
-        "询问BTC价格": "价格追踪",
-        "询问贪婪指数": "情绪监测",
-        "询问BTC市场交易": "流动性监测",
-        "询问爆仓": "风险监测",
-        "询问BTC多空比": "仓位监测",
-        "询问BTC的新闻": "资讯监测",
-        "询问BTC的重要事件": "事件监测",
-        "询问BTC的介绍": "基础资料"
-      };
-      const signal = signalMap[titleText] || "模块监测";
-      const dashMeta = document.createElement("div");
-      dashMeta.className = "px-4 py-2.5 border-b border-gray-100 bg-white/70";
-      dashMeta.innerHTML = `
-        <div class="flex flex-wrap gap-2">
-          <span class="text-[10px] px-2.5 py-1 rounded-full bg-[#fff6cc] text-[#6e5a00] font-semibold">BTC</span>
-          <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">24h +3.11%</span>
-          <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">${signal}</span>
-        </div>
-      `;
-      const header = section.querySelector(":scope > div");
-      if (header) header.insertAdjacentElement("afterend", dashMeta);
+      <div id="suggestionWrap" class="mt-10 max-w-[1450px] flex flex-wrap items-center justify-center gap-3">
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">大饼链上巨鲸最新动向</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">ETH近4个小时走势</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">本周市场热点解读</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">全球稳定币最新政策</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">NFT市场近期回暖迹象</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">DeFi项目新趋势分析</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">数字货币安全性提升新方案</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">区块链技术未来发展预测</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">SOL近4个小时走势</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">BTC近4个小时走势</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">区块链最新利率决议及影响</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">ETH近4个小时走势</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">加密市场最新技术分析</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">NFT市场现状与未来趋势</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">大饼链上鲸最新动向</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">ETH近4个小时走势</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">本周市场热点解读</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">全球稳定币最新政策</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">NFT市场近期趋势分析</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">DeFi项目投资机会探讨</button>
+        <button class="suggest-chip rounded-full bg-white px-4 py-2 text-sm md:text-base text-[#3c4148]">区块链技术未来发展方向</button>
+      </div>
+    </section>
 
-      section.querySelectorAll("table").forEach((t) => {
-        t.classList.add("text-[12px]");
-      });
-
-      const bridge = document.createElement("div");
-      bridge.className = "p-4 pt-0 space-y-3";
-      bridge.innerHTML = `
-        <div class="rounded-xl border border-gray-200 p-3">
-          <p class="text-xs text-gray-500">对应资产</p>
-          <a href="Image%202.html" class="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-[#6e5a00]">
-            BTC · 比特币 <span class="text-emerald-600">+3.11%</span>
+    <footer class="bottom-safe fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 z-50">
+      <!-- 底部导航栏已注释 -->
+      <div class="w-full max-w-md mx-auto px-4 pb-4 pt-3">
+        <div class="flex items-center justify-between gap-3">
+          <a href="news.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+            <span class="text-[10px] font-black text-gray-500">资讯</span>
+          </a>
+          <div class="flex-grow h-12 bg-gray-50 rounded-2xl border border-gray-200 px-4 flex items-center gap-3">
+            <span class="material-symbols-outlined text-[#8a6d00] text-xl">mic</span>
+            <input id="chatInput" class="flex-grow text-sm border-none focus:ring-0 p-0 text-gray-700 bg-transparent placeholder:text-gray-400" placeholder="问问就知道" type="text" />
+          </div>
+          <a href="trade.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+            <span class="text-[10px] font-black text-gray-500">行情</span>
           </a>
         </div>
-        <div class="rounded-xl border border-gray-200 p-3">
-          <p class="text-xs text-gray-500 mb-2">新闻来源</p>
-          <div class="space-y-1 text-sm">
-            <a href="https://www.chaincatcher.com/" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[#6e5a00]">币界网/ChainCatcher：BTC 实时资讯</a>
-            <a href="https://www.chaincatcher.com/" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[#6e5a00]">币界网：市场快讯与事件解读</a>
-          </div>
-        </div>
-        <div class="rounded-xl border border-gray-200 p-3">
-          <p class="text-xs text-gray-500 mb-2">延展问题</p>
-          <div class="flex flex-wrap gap-2">
-            <button class="rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50">这一结论对应的交易策略是什么？</button>
-            <button class="rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50">结合24小时数据再做一次判断</button>
-          </div>
-        </div>
-      `;
-      section.appendChild(bridge);
+        <p class="text-[9px] text-gray-400 mt-2 text-center">内容由AI生成，不构成投资建议</p>
+      </div>
+    </footer>
+  </main>
 
-      const row = document.createElement("div");
-      row.className = "flex items-start gap-3";
-      const icon = document.createElement("div");
-      icon.className = "w-9 h-9 rounded-xl bg-[#FFD308] text-[#5a4900] flex items-center justify-center font-headline font-extrabold shrink-0";
-      icon.textContent = "AI";
-      section.parentNode.insertBefore(row, section);
-      row.appendChild(icon);
-      row.appendChild(section);
-      section.classList.add("flex-1");
+  <script>
+    const tagChips = Array.from(document.querySelectorAll(".tag-chip"));
+    const suggestChips = Array.from(document.querySelectorAll(".suggest-chip"));
+    const chatInput = document.getElementById("chatInput");
+
+    tagChips.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tagChips.forEach((x) => x.classList.remove("active"));
+        btn.classList.add("active");
+      });
     });
 
-    const mainEl = document.querySelector("main");
-    const inputEl = document.getElementById("chatInput");
-    const sendBtn = document.getElementById("chatSendTrigger");
-    let isStreaming = false;
-
-    function scrollToBottom() {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    }
-
-    function buildMockAnswer(question) {
-      if (/多空比/.test(question)) return "BTC 多空比已汇总完成，已按交易所维度输出，并附上空头占优的风险提示。";
-      if (/爆仓/.test(question)) return "爆仓数据已整理完成，包含 1h/4h/12h/24h、单笔爆仓记录与爆仓比例。";
-      if (/新闻/.test(question)) return "已返回 BTC 相关新闻条目，按时间排序并支持点击查看详情。";
-      return "已返回完整答案。";
-    }
-
-    function resolveTargetTitle(question) {
-      if (/多空比/.test(question)) return "询问BTC多空比";
-      if (/爆仓/.test(question)) return "询问爆仓";
-      if (/新闻/.test(question)) return "询问BTC的新闻";
-      if (/贪婪|恐慌/.test(question)) return "询问贪婪指数";
-      if (/交易所|成交|交易/.test(question)) return "询问BTC市场交易";
-      if (/事件|时间轴|大事/.test(question)) return "询问BTC的重要事件";
-      if (/介绍|是什么|资料/.test(question)) return "询问BTC的介绍";
-      return "询问BTC价格";
-    }
-
-    function findTargetSection(question) {
-      const targetTitle = resolveTargetTitle(question);
-      const sections = Array.from(document.querySelectorAll("main section"));
-      return sections.find((section) => {
-        const title = section.querySelector("h2, h3")?.textContent?.trim();
-        return title === targetTitle;
+    suggestChips.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const text = btn.textContent.trim();
+        localStorage.setItem("zhidao_ai_last_prompt", text);
+        window.location.href = "ai-chat-examples.html";
       });
-    }
+    });
 
-    function appendReplayedAnswer(question) {
-      const target = findTargetSection(question);
-      if (!target) return;
-
-      const tip = document.createElement("div");
-      tip.className = "flex justify-start";
-      tip.innerHTML = `<div class="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-500">以下为完整答案模块</div>`;
-      mainEl.appendChild(tip);
-
-      const row = document.createElement("div");
-      row.className = "flex items-start gap-3";
-      const icon = document.createElement("div");
-      icon.className = "w-9 h-9 rounded-xl bg-[#FFD308] text-[#5a4900] flex items-center justify-center font-headline font-extrabold shrink-0";
-      icon.textContent = "AI";
-
-      const cloned = target.cloneNode(true);
-      cloned.classList.add("flex-1");
-      row.appendChild(icon);
-      row.appendChild(cloned);
-      mainEl.appendChild(row);
-      scrollToBottom();
-    }
-
-    function appendUserMessage(text) {
-      const node = document.createElement("div");
-      node.className = "flex justify-end";
-      node.innerHTML = `<div class="max-w-[86%] bg-[#FFD308] text-[#3d3200] rounded-2xl rounded-br-md px-4 py-2.5 text-sm shadow-sm">${text}</div>`;
-      mainEl.appendChild(node);
-    }
-
-    function appendAiMessageShell() {
-      const row = document.createElement("div");
-      row.className = "flex items-start gap-3";
-      row.innerHTML = `
-        <div class="w-9 h-9 rounded-xl bg-[#FFD308] text-[#5a4900] flex items-center justify-center font-headline font-extrabold shrink-0">AI</div>
-        <div class="flex-1 bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm border border-gray-100">
-          <div id="thinkingText" class="text-sm text-gray-600"></div>
-          <p id="streamText" class="text-sm text-gray-700 leading-6 hidden"></p>
-        </div>
-      `;
-      mainEl.appendChild(row);
-      return row;
-    }
-
-    function runMockFlow(question) {
-      if (isStreaming) return;
-      const text = question.trim();
+    function submit() {
+      const text = (chatInput.value || "").trim();
       if (!text) return;
-      isStreaming = true;
-      appendUserMessage(text);
-      inputEl.value = "";
-      scrollToBottom();
-
-      const aiRow = appendAiMessageShell();
-      const thinkingEl = aiRow.querySelector("#thinkingText");
-      const streamEl = aiRow.querySelector("#streamText");
-      const thinkingStates = [
-        "AI 思考中 · 正在理解问题…",
-        "AI 思考中 · 正在匹配模块…",
-        "AI 思考中 · 正在组织答案…"
-      ];
-      let stateIdx = 0;
-      thinkingEl.textContent = thinkingStates[stateIdx];
-      const thinkingTimer = setInterval(() => {
-        stateIdx = (stateIdx + 1) % thinkingStates.length;
-        thinkingEl.textContent = thinkingStates[stateIdx];
-      }, 650);
-
-      setTimeout(() => {
-        clearInterval(thinkingTimer);
-        // 思考结束后不显示任何过渡文案，直接展示最终答案模块
-        aiRow.remove();
-        appendReplayedAnswer(text);
-        isStreaming = false;
-      }, 1900);
+      localStorage.setItem("zhidao_ai_last_prompt", text);
+      window.location.href = "ai-chat-examples.html";
     }
 
-    if (sendBtn) sendBtn.addEventListener("click", () => runMockFlow(inputEl.value));
-    if (inputEl) {
-      inputEl.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") runMockFlow(inputEl.value);
+    if (chatInput) {
+      chatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          submit();
+        }
       });
     }
   </script>

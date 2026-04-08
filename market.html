@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="0; url=trade.html" />
+  <script>window.location.replace("trade.html");</script>
+  <title>行情 - ZhiDao AI</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: "Inter", sans-serif; }
+    .font-headline { font-family: "Manrope", sans-serif; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24; }
+    .status-bar-safe { padding-top: env(safe-area-inset-top); }
+    .bottom-nav-safe { padding-bottom: env(safe-area-inset-bottom); }
+  </style>
+</head>
+<body class="bg-[#f3f3f4] text-[#2c2f30] min-h-screen pb-44">
+  <header class="status-bar-safe sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="w-8"></div>
+      <div class="text-center">
+        <p class="font-headline font-extrabold tracking-tight">交易所</p>
+      </div>
+      <a href="wallet.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold">
+        <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+        <span>1,280.45 USDT</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-4 pb-32">
+    <section class="bg-white rounded-3xl border border-gray-100 shadow-sm p-4">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2 text-xs text-gray-500">
+          <span class="px-2.5 py-1 rounded-full bg-gray-100">自选</span>
+          <span class="px-2.5 py-1 rounded-full bg-gray-100">币安</span>
+          <span class="px-2.5 py-1 rounded-full bg-gray-100">欧易</span>
+          <span class="px-2.5 py-1 rounded-full bg-gray-100">Hyperliquid</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-400">
+          <span class="material-symbols-outlined text-[20px]">tune</span>
+          <span class="material-symbols-outlined text-[20px]">search</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-[1.3fr_1fr_0.7fr] text-[11px] text-gray-400 px-1 pb-2 border-b border-gray-100">
+        <span>名称/成交额</span>
+        <span class="text-right">价格</span>
+        <span class="text-right">24h涨跌</span>
+      </div>
+
+      <div class="divide-y divide-gray-100">
+        <div class="grid grid-cols-[1.3fr_1fr_0.7fr] items-center py-3">
+          <div><p class="font-bold">BTC <span class="text-gray-400 text-xs">/USDT</span></p><p class="text-xs text-gray-400">$2.95亿</p></div>
+          <div class="text-right"><p class="font-bold">67,824.90</p><p class="text-xs text-gray-400">$67,824.90</p></div>
+          <div class="text-right"><span class="inline-flex px-2 py-1 text-xs rounded-lg bg-red-500 text-white font-semibold">-2.36%</span></div>
+        </div>
+        <div class="grid grid-cols-[1.3fr_1fr_0.7fr] items-center py-3">
+          <div><p class="font-bold">ETH <span class="text-gray-400 text-xs">/USDT</span></p><p class="text-xs text-gray-400">$2.95亿</p></div>
+          <div class="text-right"><p class="font-bold">67,824.90</p><p class="text-xs text-gray-400">$67,824.90</p></div>
+          <div class="text-right"><span class="inline-flex px-2 py-1 text-xs rounded-lg bg-red-500 text-white font-semibold">-2.36%</span></div>
+        </div>
+        <div class="grid grid-cols-[1.3fr_1fr_0.7fr] items-center py-3">
+          <div><p class="font-bold">USDT <span class="text-gray-400 text-xs">/USDT</span></p><p class="text-xs text-gray-400">$2.95亿</p></div>
+          <div class="text-right"><p class="font-bold">67,824.90</p><p class="text-xs text-gray-400">$67,824.90</p></div>
+          <div class="text-right"><span class="inline-flex px-2 py-1 text-xs rounded-lg bg-emerald-500 text-white font-semibold">+2.36%</span></div>
+        </div>
+        <div class="grid grid-cols-[1.3fr_1fr_0.7fr] items-center py-3">
+          <div><p class="font-bold">XRP <span class="text-gray-400 text-xs">/USDT</span></p><p class="text-xs text-gray-400">$2.95亿</p></div>
+          <div class="text-right"><p class="font-bold">67,824.90</p><p class="text-xs text-gray-400">$67,824.90</p></div>
+          <div class="text-right"><span class="inline-flex px-2 py-1 text-xs rounded-lg bg-red-500 text-white font-semibold">-2.36%</span></div>
+        </div>
+        <div class="grid grid-cols-[1.3fr_1fr_0.7fr] items-center py-3">
+          <div><p class="font-bold">BNB <span class="text-gray-400 text-xs">/USDT</span></p><p class="text-xs text-gray-400">$2.95亿</p></div>
+          <div class="text-right"><p class="font-bold">67,824.90</p><p class="text-xs text-gray-400">$67,824.90</p></div>
+          <div class="text-right"><span class="inline-flex px-2 py-1 text-xs rounded-lg bg-emerald-500 text-white font-semibold">+2.36%</span></div>
+        </div>
+        <div class="grid grid-cols-[1.3fr_1fr_0.7fr] items-center py-3">
+          <div><p class="font-bold">SOL <span class="text-gray-400 text-xs">/USDT</span></p><p class="text-xs text-gray-400">$2.95亿</p></div>
+          <div class="text-right"><p class="font-bold">67,824.90</p><p class="text-xs text-gray-400">$67,824.90</p></div>
+          <div class="text-right"><span class="inline-flex px-2 py-1 text-xs rounded-lg bg-red-500 text-white font-semibold">-2.36%</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 bottom-nav-safe z-50">
+    <!-- 底部导航栏已注释 -->
+    <div class="w-full max-w-md mx-auto px-4 pb-4 pt-3">
+      <div class="flex items-center justify-between gap-3">
+        <a href="news.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+          <span class="text-[10px] font-black text-gray-500">资讯</span>
+        </a>
+        <div id="openAiAssistantInput" class="flex-grow h-12 bg-gray-50 rounded-2xl border border-gray-200 px-4 flex items-center gap-3 cursor-pointer">
+          <span class="material-symbols-outlined text-[#8a6d00] text-xl">mic</span>
+          <input id="aiAssistantInput" class="flex-grow text-sm border-none focus:ring-0 p-0 text-gray-700 bg-transparent placeholder:text-gray-400 cursor-pointer" placeholder="提问或搜索" type="text" readonly />
+        </div>
+        <a href="trade.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+          <span class="text-[10px] font-black text-gray-500">行情</span>
+        </a>
+      </div>
+      <p class="text-[9px] text-gray-400 mt-2 text-center">内容由AI生成，不构成投资建议</p>
+    </div>
+  </div>
+
+  <script>
+    const openAiAssistantInputEl = document.getElementById("openAiAssistantInput");
+    const aiAssistantInputEl = document.getElementById("aiAssistantInput");
+    if (openAiAssistantInputEl) {
+      openAiAssistantInputEl.addEventListener("click", () => {
+        window.location.href = "ai-chat.html";
+      });
+    }
+    if (aiAssistantInputEl) {
+      aiAssistantInputEl.addEventListener("focus", () => {
+        window.location.href = "ai-chat.html";
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,249 +1,338 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "secondary": "#5a5c5e",
-                        "primary": "#FFD700",
-                        "on-secondary-fixed-variant": "#5a5c5e",
-                        "surface-tint": "#FFD700",
-                        "on-primary-container": "#000000",
-                        "surface-container-highest": "#dadddf",
-                        "background": "#f5f6f7",
-                        "on-error-container": "#520c00",
-                        "on-tertiary-fixed-variant": "#466370",
-                        "outline": "#757778",
-                        "error-dim": "#b92902",
-                        "on-error": "#ffefec",
-                        "inverse-surface": "#0c0f10",
-                        "secondary-fixed-dim": "#d4d4d7",
-                        "outline-variant": "#abadae",
-                        "on-tertiary-fixed": "#2a4753",
-                        "on-secondary-fixed": "#3e3f42",
-                        "surface": "#f5f6f7",
-                        "on-primary-fixed": "#000000",
-                        "primary-fixed": "#FFD700",
-                        "primary-dim": "#e6c200",
-                        "inverse-on-surface": "#9b9d9e",
-                        "on-primary-fixed-variant": "#000000",
-                        "on-secondary": "#f2f2f5",
-                        "on-primary": "#000000",
-                        "tertiary-container": "#ceedfd",
-                        "inverse-primary": "#FFD700",
-                        "surface-container-low": "#eff1f2",
-                        "on-background": "#2c2f30",
-                        "surface-container": "#e6e8ea",
-                        "on-secondary-container": "#505254",
-                        "secondary-fixed": "#e2e2e5",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-container": "#e2e2e5",
-                        "on-tertiary-container": "#3c5966",
-                        "primary-fixed-dim": "#FFD700",
-                        "surface-container-high": "#e0e3e4",
-                        "error-container": "#f95630",
-                        "surface-bright": "#f5f6f7",
-                        "tertiary-dim": "#375361",
-                        "tertiary": "#435f6d",
-                        "on-surface-variant": "#595c5d",
-                        "on-tertiary": "#e4f5ff",
-                        "on-surface": "#2c2f30",
-                        "primary-container": "#FFD700",
-                        "error": "#b02500",
-                        "tertiary-fixed-dim": "#c0dfee",
-                        "surface-variant": "#dadddf",
-                        "surface-dim": "#d1d5d7",
-                        "tertiary-fixed": "#ceedfd",
-                        "secondary-dim": "#4e5052"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Manrope"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                },
-            },
-        }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .glass-overlay {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-        }
-    </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>交易 - Binance 实时</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: "Inter", sans-serif; }
+    .font-headline { font-family: "Manrope", sans-serif; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24; }
+    .status-bar-safe { padding-top: env(safe-area-inset-top); }
+    .bottom-nav-safe { padding-bottom: env(safe-area-inset-bottom); }
+    .top-tab.active { color: #111827; border-bottom: 2px solid #f59e0b; font-weight: 700; }
+    .market-tab.active { background: #fff; color: #111827; border-color: #e5e7eb; font-weight: 700; }
   </style>
 </head>
-<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
-<!-- Background News Feed (Dimmed Content) -->
-<main class="h-screen w-full overflow-hidden relative">
-<!-- TopAppBar Placeholder (as per JSON structure) -->
-<header class="bg-white/80 backdrop-blur-md fixed top-0 w-full z-10 flex justify-between items-center px-4 h-16 w-full max-w-7xl mx-auto">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-zinc-900">arrow_back</span>
-<h1 class="font-headline font-bold text-zinc-900 text-lg">Market News</h1>
-</div>
-<span class="material-symbols-outlined text-zinc-900">more_vert</span>
-</header>
-<!-- News Content Layer -->
-<div class="pt-20 px-4 space-y-6 opacity-30 grayscale-[0.5] blur-[1px]">
-<!-- News Item 1 -->
-<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10">
-<div class="flex justify-between items-start mb-3">
-<span class="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">AI Insight</span>
-<span class="text-on-surface-variant text-xs">2m ago</span>
-</div>
-<h3 class="font-headline font-bold text-on-surface text-lg leading-tight mb-2">XRP Network Activity Surges Amid New Partnership Rumors</h3>
-<p class="text-on-surface-variant text-sm line-clamp-2">Latest on-chain data suggests a 40% increase in active wallet addresses over the past 24 hours as institutional interest grows...</p>
-<div class="mt-4 rounded-lg overflow-hidden h-40">
-<img class="w-full h-full object-cover" data-alt="abstract financial data visualization with flowing golden lines and tech elements on white background editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGNlEoJf6SAVu8QEcv-X3wojgPoO15DJGkQWIqdu3nEbPcHkRPsFzoVnDH9iI-M2iCGvdRIb3mskp6dj8uDiqd-jQan9iUdTBpPuyehWDuJzKyDcS9jmc4dWFDtv9AaUTaNnOsEMCibZuT_hk6c95daPss70i4J5ZDy8wlt8zcey0PaGn0hlA2QVLKyI75AlaKUj6jGvQSmr92z1YTMMSWdNjqwR0W4dNW-LapQaERDmDSBvmzH2m2_4U_iG8bXeErhMibA13uJf8i"/>
-</div>
-</div>
-<!-- News Item 2 -->
-<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10">
-<div class="flex justify-between items-start mb-3">
-<span class="bg-primary-container text-on-primary-container px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Market Analysis</span>
-<span class="text-on-surface-variant text-xs">15m ago</span>
-</div>
-<h3 class="font-headline font-bold text-on-surface text-lg leading-tight mb-2">Bitcoin Dominance Tested at Key 52% Resistance Level</h3>
-<p class="text-on-surface-variant text-sm">Analysts monitor critical support levels as altcoins show signs of life in the weekend trading session.</p>
-</div>
-</div>
-</main>
-<!-- Modal Backdrop -->
-<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-40"></div>
-<!-- Spot Trading Bottom Sheet -->
-<div class="fixed bottom-0 left-0 right-0 h-[751px] bg-surface-container-lowest rounded-t-[32px] z-50 flex flex-col shadow-[0_-8px_40px_rgba(0,0,0,0.12)] overflow-hidden">
-<!-- Handlebar -->
-<div class="w-full flex justify-center py-3">
-<div class="w-12 h-1.5 bg-surface-container-highest rounded-full"></div>
-</div>
-<!-- Header -->
-<header class="px-6 pb-4">
-<div class="flex justify-between items-center mb-1">
-<span class="font-headline font-extrabold text-zinc-900 text-xl tracking-tight">Spot Trading</span>
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">close</span>
-</div>
-<div class="flex items-baseline gap-3">
-<h2 class="font-headline font-bold text-zinc-900 text-2xl uppercase">XRP/USDT</h2>
-<div class="flex items-center gap-1.5">
-<span class="font-bold text-error text-lg tracking-tight">0.6241</span>
-<span class="text-error text-xs font-semibold px-1.5 py-0.5 bg-error-container/10 rounded">-2.45%</span>
-</div>
-</div>
-</header>
-<!-- Main Form Area -->
-<div class="flex-1 overflow-y-auto px-6 pb-24 hide-scrollbar">
-<!-- Buy/Sell Tabs -->
-<div class="bg-surface-container-low p-1.5 rounded-2xl flex mb-6">
-<button class="flex-1 py-3.5 rounded-xl font-headline font-extrabold text-sm transition-all duration-200 bg-[#FFD700] text-black shadow-sm">
-                    Buy
-                </button>
-<button class="flex-1 py-3.5 rounded-xl font-headline font-bold text-sm text-on-surface-variant hover:text-on-surface transition-all">
-                    Sell
-                </button>
-</div>
-<!-- Trading Logic -->
-<div class="space-y-6">
-<!-- Order Type -->
-<div class="flex items-center justify-between">
-<button class="flex items-center gap-1 text-on-surface font-semibold text-sm">
-                        Limit Order <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
-</button>
-<span class="material-symbols-outlined text-on-surface-variant text-lg">info</span>
-</div>
-<!-- Input Price -->
-<div class="space-y-2">
-<div class="flex justify-between px-1">
-<label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Price</label>
-</div>
-<div class="relative flex items-center">
-<input class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 font-headline font-bold text-lg focus:ring-2 focus:ring-primary-fixed" type="text" value="0.6241"/>
-<span class="absolute right-5 font-bold text-on-surface-variant text-sm">USDT</span>
-</div>
-</div>
-<!-- Input Amount -->
-<div class="space-y-2">
-<div class="flex justify-between px-1">
-<label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Amount</label>
-</div>
-<div class="relative flex items-center">
-<input class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 font-headline font-bold text-lg focus:ring-2 focus:ring-primary-fixed" placeholder="Min 10 XRP" type="text"/>
-<span class="absolute right-5 font-bold text-on-surface-variant text-sm">XRP</span>
-</div>
-</div>
-<!-- Balance and Percentage Selection -->
-<div class="space-y-4 pt-2">
-<div class="flex justify-between items-center text-[12px] font-medium">
-<span class="text-on-surface-variant">Available</span>
-<span class="text-on-surface font-bold">1,000.00 USDT <span class="material-symbols-outlined text-[14px] align-middle ml-1 text-primary">add_circle</span></span>
-</div>
-<!-- Slider Interaction -->
-<div class="relative h-8 flex items-center px-2">
-<div class="absolute w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-primary-container w-1/2"></div>
-</div>
-<div class="absolute left-0 w-4 h-4 bg-primary rounded-full border-2 border-white shadow-md"></div>
-<div class="absolute left-1/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
-<div class="absolute left-1/2 -translate-x-1/2 w-5 h-5 bg-primary border-4 border-white shadow-lg rounded-full"></div>
-<div class="absolute left-3/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
-<div class="absolute right-0 w-2.5 h-2.5 bg-white border border-outline-variant/30 rounded-full"></div>
-</div>
-<div class="grid grid-cols-4 gap-2">
-<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">25%</button>
-<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">50%</button>
-<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">75%</button>
-<button class="py-2 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-bold text-on-surface-variant transition-colors">100%</button>
-</div>
-</div>
-<!-- Order Summary Tonal Box -->
-<div class="bg-surface-container-low/50 p-4 rounded-xl space-y-2">
-<div class="flex justify-between text-xs">
-<span class="text-on-surface-variant">Transaction Fee</span>
-<span class="text-on-surface font-semibold">0.1 XRP</span>
-</div>
-<div class="flex justify-between text-sm font-bold border-t border-outline-variant/10 pt-2">
-<span class="text-on-surface">Estimated Total</span>
-<span class="text-on-surface">-- USDT</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Sticky CTA Area -->
-<div class="absolute bottom-0 left-0 right-0 p-6 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/10">
-<div class="flex flex-col gap-2">
-<button class="w-full py-4 bg-[#FFD700] text-black rounded-2xl font-headline font-extrabold text-lg shadow-[0_12px_24px_-8px_rgba(255,215,0,0.4)] active:scale-[0.98] transition-all">
-            Buy XRP
+<body class="bg-[#f3f3f4] text-[#2c2f30] min-h-screen pb-44">
+  <header class="status-bar-safe sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="w-8"></div>
+      <div class="text-center">
+        <p class="font-headline font-extrabold tracking-tight">交易所</p>
+        <p class="text-[11px] text-gray-400">Binance 实时行情</p>
+      </div>
+      <a href="wallet.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold">
+        <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+        <span>1,280.45 USDT</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-4 pb-32">
+    <section class="bg-white rounded-3xl border border-gray-100 shadow-sm p-4">
+      <div class="border-b border-gray-100 mb-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4 text-sm text-gray-500 overflow-x-auto whitespace-nowrap">
+            <button class="top-tab active py-2.5 border-b-2 border-transparent" data-market-tab="favorites">自选 <span id="favCountBadge" class="text-[11px] text-amber-600">(0)</span></button>
+            <button class="top-tab py-2.5 border-b-2 border-transparent" data-market-tab="binance">币安</button>
+            <button class="top-tab py-2.5 border-b-2 border-transparent" data-market-tab="okx">欧易</button>
+            <button class="top-tab py-2.5 border-b-2 border-transparent" data-market-tab="hyperliquid">Hyperliquid</button>
+          </div>
+          <div class="flex items-center gap-1 text-gray-400">
+            <button id="openFavManagerBtn" class="hidden px-2.5 py-1.5 rounded-lg bg-amber-50 text-amber-700 text-xs font-semibold border border-amber-200" title="管理自选">
+              管理自选
+            </button>
+            <button class="p-1.5 rounded-lg hover:bg-gray-100" title="搜索">
+              <span class="material-symbols-outlined text-[19px]">search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2 text-xs text-gray-500 overflow-x-auto whitespace-nowrap">
+          <button class="market-tab active px-2.5 py-1 rounded-full border border-transparent" data-type-tab="spot">现货</button>
+          <button class="market-tab px-2.5 py-1 rounded-full border border-transparent" data-type-tab="futures">合约</button>
+        </div>
+        <button id="refreshBtn" class="inline-flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg bg-gray-100 text-gray-600">
+          <span class="material-symbols-outlined text-[15px]">refresh</span>刷新
         </button>
-<p class="text-center text-[10px] font-bold text-on-surface-variant/40 uppercase tracking-[0.2em] pt-1">
-            Switch to <span class="text-error/40">Sell Tab</span> for dynamic controls
-        </p>
-</div>
-</div>
-</div>
-<!-- BottomNavBar (Hidden on desktop, simplified for overlay context) -->
-</body></html>
+      </div>
+
+      <div id="pairsHeader" class="grid text-[11px] text-gray-400 px-1 pb-2 border-b border-gray-100"></div>
+
+      <div id="pairsList" class="divide-y divide-gray-100"></div>
+      <p id="feedStatus" class="text-[11px] text-gray-400 mt-3">加载中...</p>
+    </section>
+
+    <section id="favManagerPanel" class="hidden mt-3 bg-white rounded-3xl border border-gray-100 shadow-sm p-4">
+      <div class="flex items-center justify-between mb-3">
+        <p class="font-headline font-bold text-sm">自选管理</p>
+        <button id="closeFavManagerBtn" class="text-xs px-2.5 py-1.5 rounded-lg bg-gray-100 text-gray-600">关闭</button>
+      </div>
+      <div id="favGrid" class="grid grid-cols-2 gap-2"></div>
+      <button id="saveFavBtn" class="w-full mt-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5">保存自选</button>
+    </section>
+  </main>
+
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 bottom-nav-safe z-50">
+    <!-- 底部导航栏已注释 -->
+    <div class="w-full max-w-md mx-auto px-4 pb-4 pt-3">
+      <div class="flex items-center justify-between gap-3">
+        <a href="news.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+          <span class="text-[10px] font-black text-gray-500">资讯</span>
+        </a>
+        <div id="openAiAssistantInput" class="flex-grow h-12 bg-gray-50 rounded-2xl border border-gray-200 px-4 flex items-center gap-3 cursor-pointer">
+          <span class="material-symbols-outlined text-[#8a6d00] text-xl">mic</span>
+          <input id="aiAssistantInput" class="flex-grow text-sm border-none focus:ring-0 p-0 text-gray-700 bg-transparent placeholder:text-gray-400 cursor-pointer" placeholder="提问或搜索" type="text" readonly />
+        </div>
+        <a href="trade.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+          <span class="text-[10px] font-black text-gray-500">行情</span>
+        </a>
+      </div>
+      <p class="text-[9px] text-gray-400 mt-2 text-center">内容由AI生成，不构成投资建议</p>
+    </div>
+  </div>
+
+  <script>
+    const PAIRS = [
+      "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT",
+      "DOGEUSDT", "ADAUSDT", "TRXUSDT", "LINKUSDT", "AVAXUSDT"
+    ];
+
+    const pairsListEl = document.getElementById("pairsList");
+    const feedStatusEl = document.getElementById("feedStatus");
+    const refreshBtnEl = document.getElementById("refreshBtn");
+    const topTabs = Array.from(document.querySelectorAll("[data-market-tab]"));
+    const typeTabs = Array.from(document.querySelectorAll("[data-type-tab]"));
+    const openFavManagerBtnEl = document.getElementById("openFavManagerBtn");
+    const favCountBadgeEl = document.getElementById("favCountBadge");
+    const pairsHeaderEl = document.getElementById("pairsHeader");
+    const favManagerPanelEl = document.getElementById("favManagerPanel");
+    const closeFavManagerBtnEl = document.getElementById("closeFavManagerBtn");
+    const favGridEl = document.getElementById("favGrid");
+    const saveFavBtnEl = document.getElementById("saveFavBtn");
+    const openAiAssistantInputEl = document.getElementById("openAiAssistantInput");
+    const aiAssistantInputEl = document.getElementById("aiAssistantInput");
+    const FAV_KEY = "zhidao_trade_favorites";
+    let selectedMarket = "favorites";
+    let selectedType = "spot";
+    let favorites = [];
+
+    function fmtPrice(n) {
+      const value = Number(n);
+      if (!Number.isFinite(value)) return "--";
+      if (value >= 1000) return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (value >= 1) return value.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+      return value.toLocaleString("en-US", { minimumFractionDigits: 6, maximumFractionDigits: 6 });
+    }
+
+    function fmtAmount(n) {
+      const value = Number(n);
+      if (!Number.isFinite(value)) return "--";
+      if (value >= 1e8) return `${(value / 1e8).toFixed(2)}亿`;
+      if (value >= 1e4) return `${(value / 1e4).toFixed(2)}万`;
+      return value.toFixed(2);
+    }
+
+    function renderHeader() {
+      const showFavCol = selectedMarket === "favorites";
+      pairsHeaderEl.className = showFavCol
+        ? "grid grid-cols-[1.2fr_1fr_0.7fr_0.45fr] text-[11px] text-gray-400 px-1 pb-2 border-b border-gray-100"
+        : "grid grid-cols-[1.35fr_1fr_0.7fr] text-[11px] text-gray-400 px-1 pb-2 border-b border-gray-100";
+      pairsHeaderEl.innerHTML = showFavCol
+        ? `<span>名称/成交额</span><span class="text-right">价格</span><span class="text-right">24h涨跌</span><span class="text-right">自选</span>`
+        : `<span>名称/成交额</span><span class="text-right">价格</span><span class="text-right">24h涨跌</span>`;
+    }
+
+    function renderRows(items) {
+      pairsListEl.innerHTML = "";
+      const showFavCol = selectedMarket === "favorites";
+      items.forEach((item) => {
+        const symbol = item.symbol;
+        const base = symbol.replace("USDT", "");
+        const pct = Number(item.priceChangePercent);
+        const positive = Number.isFinite(pct) ? pct >= 0 : false;
+        const isFav = favorites.includes(symbol);
+        const row = document.createElement("a");
+        row.href = `trade-detail.html?symbol=${encodeURIComponent(symbol)}`;
+        row.className = showFavCol
+          ? "grid grid-cols-[1.2fr_1fr_0.7fr_0.45fr] items-center py-3 hover:bg-gray-50 rounded-xl px-1"
+          : "grid grid-cols-[1.35fr_1fr_0.7fr] items-center py-3 hover:bg-gray-50 rounded-xl px-1";
+        row.innerHTML = `
+          <div>
+            <p class="font-bold">${base} <span class="text-gray-400 text-xs">/USDT</span></p>
+            <p class="text-xs text-gray-400">$${fmtAmount(item.quoteVolume)}</p>
+          </div>
+          <div class="text-right">
+            <p class="font-bold">${fmtPrice(item.lastPrice)}</p>
+            <p class="text-xs text-gray-400">$${fmtPrice(item.weightedAvgPrice)}</p>
+          </div>
+          <div class="text-right">
+            <span class="inline-flex px-2 py-1 text-xs rounded-lg ${positive ? "bg-emerald-500" : "bg-red-500"} text-white font-semibold">
+              ${Number.isFinite(pct) ? `${positive ? "+" : ""}${pct.toFixed(2)}%` : "--"}
+            </span>
+          </div>
+          ${showFavCol ? `
+            <div class="text-right">
+              <button class="fav-toggle-btn inline-flex items-center justify-center w-7 h-7 rounded-md ${isFav ? "bg-amber-500 text-white" : "bg-gray-100 text-gray-400"}" data-symbol="${symbol}">
+                <span class="material-symbols-outlined text-[16px]">${isFav ? "check" : "add"}</span>
+              </button>
+            </div>
+          ` : ""}
+        `;
+        const favBtn = showFavCol ? row.querySelector(".fav-toggle-btn") : null;
+        if (showFavCol && favBtn) {
+          favBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const s = favBtn.dataset.symbol;
+            if (!s) return;
+            if (favorites.includes(s)) {
+              favorites = favorites.filter((x) => x !== s);
+            } else {
+              favorites.push(s);
+            }
+            saveFavorites();
+            renderFavGrid();
+            updateTabStyles();
+            loadBinanceTickers();
+          });
+        }
+        pairsListEl.appendChild(row);
+      });
+      if (!items.length) {
+        pairsListEl.innerHTML = '<p class="text-sm text-gray-500 py-8 text-center">当前分组暂无交易对</p>';
+      }
+    }
+
+    function loadFavorites() {
+      try {
+        const raw = localStorage.getItem(FAV_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        favorites = Array.isArray(parsed) ? parsed.filter((s) => typeof s === "string") : [];
+      } catch (_) {
+        favorites = [];
+      }
+      if (!favorites.length) {
+        favorites = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT"];
+      }
+    }
+
+    function saveFavorites() {
+      localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
+    }
+
+    function renderFavGrid() {
+      favGridEl.innerHTML = "";
+      PAIRS.forEach((symbol) => {
+        const checked = favorites.includes(symbol);
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = `flex items-center justify-between rounded-xl border px-3 py-2 text-sm ${checked ? "border-amber-400 bg-amber-50 text-gray-900" : "border-gray-200 bg-gray-50 text-gray-700"}`;
+        item.innerHTML = `
+          <span>${symbol.replace("USDT", " / USDT")}</span>
+          <span class="material-symbols-outlined text-[18px] ${checked ? "text-amber-500" : "text-gray-400"}">${checked ? "check_box" : "check_box_outline_blank"}</span>
+        `;
+        item.addEventListener("click", () => {
+          if (favorites.includes(symbol)) {
+            favorites = favorites.filter((s) => s !== symbol);
+          } else {
+            favorites.push(symbol);
+          }
+          renderFavGrid();
+        });
+        favGridEl.appendChild(item);
+      });
+    }
+
+    function getSymbolsByTab() {
+      if (selectedMarket === "favorites") return favorites;
+      return PAIRS;
+    }
+
+    function updateTabStyles() {
+      topTabs.forEach((btn) => btn.classList.toggle("active", btn.dataset.marketTab === selectedMarket));
+      typeTabs.forEach((btn) => btn.classList.toggle("active", btn.dataset.typeTab === selectedType));
+      if (openFavManagerBtnEl) {
+        openFavManagerBtnEl.classList.toggle("hidden", selectedMarket !== "favorites");
+      }
+      if (favCountBadgeEl) {
+        favCountBadgeEl.textContent = `(${favorites.length})`;
+      }
+      renderHeader();
+    }
+
+    async function loadBinanceTickers() {
+      feedStatusEl.textContent = "正在同步 Binance 行情...";
+      try {
+        const resp = await fetch("https://api.binance.com/api/v3/ticker/24hr", { cache: "no-store" });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const all = await resp.json();
+        const map = new Map(all.map((x) => [x.symbol, x]));
+        const symbols = getSymbolsByTab();
+        const rows = symbols.map((s) => map.get(s)).filter(Boolean);
+        renderRows(rows);
+        const marketLabelMap = { favorites: "自选", binance: "币安", okx: "欧易", hyperliquid: "Hyperliquid" };
+        const typeLabelMap = { spot: "现货", futures: "合约" };
+        feedStatusEl.textContent = `已更新 ${rows.length} 个交易对 · ${marketLabelMap[selectedMarket]} · ${typeLabelMap[selectedType]} · ${new Date().toLocaleTimeString()}`;
+      } catch (err) {
+        console.error(err);
+        feedStatusEl.textContent = `加载失败：${err.message || "网络错误"}`;
+      }
+    }
+
+    topTabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedMarket = btn.dataset.marketTab;
+        updateTabStyles();
+        loadBinanceTickers();
+      });
+    });
+    typeTabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedType = btn.dataset.typeTab;
+        updateTabStyles();
+        loadBinanceTickers();
+      });
+    });
+    if (openFavManagerBtnEl) {
+      openFavManagerBtnEl.addEventListener("click", () => {
+        favManagerPanelEl.classList.toggle("hidden");
+      });
+    }
+    if (closeFavManagerBtnEl) {
+      closeFavManagerBtnEl.addEventListener("click", () => {
+        favManagerPanelEl.classList.add("hidden");
+      });
+    }
+    if (saveFavBtnEl) {
+      saveFavBtnEl.addEventListener("click", () => {
+        saveFavorites();
+        favManagerPanelEl.classList.add("hidden");
+        loadBinanceTickers();
+      });
+    }
+    if (refreshBtnEl) refreshBtnEl.addEventListener("click", loadBinanceTickers);
+    if (openAiAssistantInputEl) {
+      openAiAssistantInputEl.addEventListener("click", () => {
+        window.location.href = "ai-chat.html";
+      });
+    }
+    if (aiAssistantInputEl) {
+      aiAssistantInputEl.addEventListener("focus", () => {
+        window.location.href = "ai-chat.html";
+      });
+    }
+
+    loadFavorites();
+    renderFavGrid();
+    updateTabStyles();
+    loadBinanceTickers();
+    setInterval(loadBinanceTickers, 12000);
+  </script>
+</body>
+</html>

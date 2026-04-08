@@ -3,6 +3,9 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- Agent 页面已停用，默认进入 AI 助手 -->
+<meta http-equiv="refresh" content="0; url=ai-chat.html"/>
+<script>window.location.replace("ai-chat.html");</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -93,14 +96,10 @@
 <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" x2="17" y1="12" y2="12"></line></svg>
 </button>
 </div>
-<div class="flex items-center gap-2">
-<button class="bg-gray-100 px-4 py-1.5 rounded-full text-xs font-medium text-gray-500">
-      登录 | 授权
-    </button>
-<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-<svg class="text-gray-400" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-</div>
-</div>
+<a href="wallet.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+<span>1,280.45 USDT</span>
+</a>
 </header>
 <!-- END: Header from SCREEN_24 -->
 <main class="max-w-7xl mx-auto px-6 pt-8 space-y-10">
@@ -205,38 +204,19 @@
 </main>
 <!-- Bottom Navigation -->
 <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 bottom-nav-safe z-50">
-<nav class="w-full max-w-md mx-auto px-5 py-3 flex items-center justify-between">
-<a href="code.html" class="relative flex flex-col items-center justify-center min-w-[72px] text-gray-900">
-<span class="material-symbols-outlined text-[26px]" style="font-variation-settings:'FILL' 1">smart_toy</span>
-<span class="text-[15px] font-black leading-none mt-1">Agent</span>
-<span class="absolute -bottom-2 w-8 h-1.5 bg-primary-container rounded-full"></span>
-</a>
-<a href="Image 2.html" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
-<span class="material-symbols-outlined text-[26px]">expand_circle_down</span>
-<span class="text-[15px] font-bold leading-none mt-1">发现</span>
-</a>
-<a href="news.html" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
-<span class="material-symbols-outlined text-[26px]">newspaper</span>
-<span class="text-[15px] font-bold leading-none mt-1">资讯助手</span>
-</a>
-<a href="#" class="flex flex-col items-center justify-center min-w-[72px] text-gray-400 hover:text-gray-700 transition-colors">
-<span class="material-symbols-outlined text-[26px]">account_balance_wallet</span>
-<span class="text-[15px] font-bold leading-none mt-1">钱包</span>
-</a>
-</nav>
+<!-- 底部导航栏已注释 -->
 <div class="w-full max-w-md mx-auto px-4 pb-4">
 <div class="flex items-center justify-between gap-3">
-<button class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
-<span class="text-[10px] font-black text-gray-500">交易</span>
-</button>
+<a href="news.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+<span class="text-[10px] font-black text-gray-500">资讯</span>
+</a>
 <div class="flex-grow h-12 bg-gray-50 rounded-2xl border border-gray-200 px-4 flex items-center gap-3">
 <span class="material-symbols-outlined text-[#8a6d00] text-xl">mic</span>
 <input class="flex-grow text-sm border-none focus:ring-0 p-0 text-gray-700 bg-transparent placeholder:text-gray-400" placeholder="提问或搜索" type="text"/>
-<span class="material-symbols-outlined text-gray-400 text-xl">grid_view</span>
 </div>
-<button class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
+<a href="trade.html" class="w-12 h-12 flex-shrink-0 border border-gray-200 rounded-2xl flex items-center justify-center bg-white shadow-sm">
 <span class="text-[10px] font-black text-gray-500">行情</span>
-</button>
+</a>
 </div>
 <p class="text-[9px] text-gray-400 mt-2 text-center">内容由AI生成，不构成投资建议</p>
 </div>
