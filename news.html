@@ -269,7 +269,7 @@
       : '';
     const FEED_PROXY_URL = `${API_ORIGIN}/api/news/feed`;
     const BINANCE_PROXY_URL = `${API_ORIGIN}/api/markets/binance-24hr`;
-    const SOURCE_URLS = [FEED_PROXY_URL, FEED_URL];
+    const SOURCE_URLS = [FEED_PROXY_URL];
     const FALLBACK_NEWS = [
       {
         title: '以太坊生态活跃度提升，链上资金持续流入',
@@ -512,13 +512,7 @@
       let lastError;
       for (const url of SOURCE_URLS) {
         try {
-          const resp = await fetch(withCacheBust(url), {
-            cache: 'no-store',
-            headers: {
-              'cache-control': 'no-cache',
-              'pragma': 'no-cache'
-            }
-          });
+          const resp = await fetch(withCacheBust(url), { cache: 'no-store' });
           if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
           const text = await resp.text();
           if (!text || text.length < 120) throw new Error('RSS 返回内容为空');
@@ -534,13 +528,7 @@
       // Prefer local proxy to bypass browser CORS restrictions on RSS origin.
       for (const source of SOURCE_URLS) {
         try {
-          const resp = await fetch(withCacheBust(source), {
-            cache: 'no-store',
-            headers: {
-              'cache-control': 'no-cache',
-              'pragma': 'no-cache'
-            }
-          });
+          const resp = await fetch(withCacheBust(source), { cache: 'no-store' });
           if (!resp.ok) continue;
           const text = await resp.text();
           if (!text || text.length < 120) continue;
@@ -555,6 +543,20 @@
         } catch (_) {
           // continue fallback chain
         }
+      }
+
+      // Secondary fallback: public RSS-to-JSON service (CORS-friendly in browser).
+      try {
+        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}&count=12&t=${Date.now()}`;
+        const resp = await fetch(rss2jsonUrl, { cache: 'no-store' });
+        if (resp.ok) {
+          const payload = await resp.json();
+          const items = Array.isArray(payload?.items) ? payload.items : [];
+          const parsed = normalizeRss2JsonItems(items);
+          if (parsed.length) return { news: parsed, source: 'rss2json' };
+        }
+      } catch (_) {
+        // continue fallback chain
       }
 
       const fallback = FALLBACK_NEWS.map((item, index) => ({
