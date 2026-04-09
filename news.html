@@ -264,7 +264,12 @@
     const SITE_URL = 'https://blockcast.it/';
     const FEED_URL = 'https://blockcast.it/feed';
     const FEED_RSS_URL = 'https://blockcast.it/feed';
-    const SOURCE_URLS = [FEED_URL];
+    const API_ORIGIN = window.location.port === '5500'
+      ? 'http://127.0.0.1:8787'
+      : '';
+    const FEED_PROXY_URL = `${API_ORIGIN}/api/news/feed`;
+    const BINANCE_PROXY_URL = `${API_ORIGIN}/api/markets/binance-24hr`;
+    const SOURCE_URLS = [FEED_PROXY_URL, FEED_URL];
     const FALLBACK_NEWS = [
       {
         title: '以太坊生态活跃度提升，链上资金持续流入',
@@ -286,7 +291,6 @@
       }
     ];
 
-    const BINANCE_TICKER_24H = 'https://api.binance.com/api/v3/ticker/24hr';
 
     const newsListEl = document.getElementById('newsList');
     const feedStatusEl = document.getElementById('feedStatus');
@@ -499,11 +503,22 @@
       });
     }
 
+    function withCacheBust(url) {
+      const sep = url.includes('?') ? '&' : '?';
+      return `${url}${sep}_=${Date.now()}`;
+    }
+
     async function fetchFeedXml() {
       let lastError;
       for (const url of SOURCE_URLS) {
         try {
-          const resp = await fetch(url, { cache: 'no-store' });
+          const resp = await fetch(withCacheBust(url), {
+            cache: 'no-store',
+            headers: {
+              'cache-control': 'no-cache',
+              'pragma': 'no-cache'
+            }
+          });
           if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
           const text = await resp.text();
           if (!text || text.length < 120) throw new Error('RSS 返回内容为空');
@@ -516,24 +531,16 @@
     }
 
     async function fetchNewsItems() {
-      // Prefer RSS2JSON in browser runtime to avoid cross-origin blocking from site/proxy endpoints.
-      try {
-        const FEED_RSS2JSON_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}&count=12`;
-        const resp = await fetch(FEED_RSS2JSON_URL, { cache: 'no-store' });
-        if (resp.ok) {
-          const payload = await resp.json();
-          const items = Array.isArray(payload?.items) ? payload.items : [];
-          const parsed = normalizeRss2JsonItems(items);
-          if (parsed.length) return { news: parsed, source: 'rss2json' };
-        }
-      } catch (_) {
-        // continue fallback chain
-      }
-
-      // Optional fallback attempt: direct feed request (works on some hosts/runtimes).
+      // Prefer local proxy to bypass browser CORS restrictions on RSS origin.
       for (const source of SOURCE_URLS) {
         try {
-          const resp = await fetch(source, { cache: 'no-store' });
+          const resp = await fetch(withCacheBust(source), {
+            cache: 'no-store',
+            headers: {
+              'cache-control': 'no-cache',
+              'pragma': 'no-cache'
+            }
+          });
           if (!resp.ok) continue;
           const text = await resp.text();
           if (!text || text.length < 120) continue;
@@ -563,7 +570,9 @@
 
     async function fetchBinanceMarkets() {
       try {
-        const resp = await fetch(BINANCE_TICKER_24H, { cache: 'no-store' });
+        const resp = await fetch(withCacheBust(BINANCE_PROXY_URL), {
+          cache: 'no-store'
+        });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const rows = await resp.json();
         if (!Array.isArray(rows) || !rows.length) throw new Error('Binance 返回为空');
@@ -744,27 +753,27 @@
         null;
       const priceValue = Number.isFinite(metric?.price) ? `$${formatPrice(metric.price)}` : '--';
       const changeValue = formatPercent(metric?.priceChange24h);
-      const isUp = Number(metric?.priceChange24h) >= 0;
+      const changeNum = Number(metric?.priceChange24h);
+      const trendNeutralThreshold = 0.8;
+      const hasTrendData = Number.isFinite(changeNum);
+      const isNeutral = !hasTrendData || Math.abs(changeNum) < trendNeutralThreshold;
+      const isUp = hasTrendData && changeNum >= trendNeutralThreshold;
       const trendClass = Number.isFinite(metric?.priceChange24h)
-        ? (isUp ? 'text-emerald-600' : 'text-rose-600')
+        ? (isNeutral ? 'text-gray-500' : (isUp ? 'text-emerald-600' : 'text-rose-600'))
         : 'text-gray-500';
-      const trendLabel = Number.isFinite(metric?.priceChange24h)
-        ? (isUp ? '利多' : '利空')
-        : '中性';
+      const trendLabel = isNeutral ? '中性' : (isUp ? '利多' : '利空');
       const trendBadgeClass = Number.isFinite(metric?.priceChange24h)
-        ? (isUp ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white')
+        ? (isNeutral ? 'bg-gray-300 text-gray-700' : (isUp ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'))
         : 'bg-gray-300 text-gray-700';
       const detailsChangeClass = Number.isFinite(metric?.priceChange24h)
-        ? (Number(metric.priceChange24h) >= 0 ? 'text-emerald-600' : 'text-rose-600')
+        ? (isNeutral ? 'text-gray-600' : (Number(metric.priceChange24h) >= 0 ? 'text-emerald-600' : 'text-rose-600'))
         : '';
-      const recommendSide = Number.isFinite(metric?.priceChange24h)
-        ? (Number(metric.priceChange24h) >= 0 ? 'buy' : 'sell')
-        : 'buy';
-      const actionLabel = recommendSide === 'buy' ? '买入' : '卖出';
-      const actionClass = recommendSide === 'buy'
-        ? 'bg-emerald-500 text-white'
-        : 'bg-rose-500 text-white';
-      const actionIcon = recommendSide === 'buy' ? 'shopping_cart' : 'trending_down';
+      const recommendSide = isNeutral ? 'neutral' : (isUp ? 'buy' : 'sell');
+      const actionLabel = recommendSide === 'neutral' ? '观望' : (recommendSide === 'buy' ? '买入' : '卖出');
+      const actionClass = recommendSide === 'neutral'
+        ? 'bg-gray-500 text-white'
+        : (recommendSide === 'buy' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white');
+      const actionIcon = recommendSide === 'neutral' ? 'remove' : (recommendSide === 'buy' ? 'shopping_cart' : 'trending_down');
       const metricsHtml = [
         metricCell('24h涨跌', changeValue, detailsChangeClass),
         metricCell('24h最高', metric && Number.isFinite(metric.high24h) ? `$${formatPrice(metric.high24h)}` : '--'),
@@ -799,7 +808,7 @@
             <div class="w-full flex items-center justify-between text-left">
               <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-[15px] text-[#7a5d00]" style="font-variation-settings:'FILL' 1">smart_toy</span>
-                <p class="text-[10px] font-extrabold tracking-[0.18em] text-[#7a5d00] uppercase">AINSIGHT</p>
+                <p class="text-[10px] font-extrabold tracking-[0.18em] text-[#7a5d00] uppercase">知道AI</p>
               </div>
             </div>
 
@@ -851,7 +860,7 @@
 
       actionBtnEl.addEventListener('click', () => {
         openTradeModal({
-          side: recommendSide,
+          side: recommendSide === 'neutral' ? 'buy' : recommendSide,
           symbol: newsItem.recommend,
           price: priceValue,
           change: changeValue,
